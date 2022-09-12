@@ -13,31 +13,15 @@ li{
 }
 
 body{
-    color:darkblue;
+    color:rgb(247, 247, 128);
     font-family: 'Oswald' ,sans;
     margin:10px 50px 10px 50px;
     width: 950px;
-    background-color: ivory;
+    background-color: black;
 }
 
 img{
     float: left;
     margin-right: 10px;
 
-}
-.left{
-    float: left;
-    width: 300px;
-    padding: 6px;
-}
-
-.center{
-   margin-left: 300px;
-   margin-right: 300px;
-   padding: 6px;
-}
-.right{
-    float: right;
-    width: 300px;
-    padding: 6px;
 }
