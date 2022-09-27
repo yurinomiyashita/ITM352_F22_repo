@@ -10,3 +10,4 @@ while( prod_num ++ < num_products){
     }
 
 }
+for(prod_num=0);
