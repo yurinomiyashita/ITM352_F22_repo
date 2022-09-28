@@ -1,16 +1,16 @@
 require("./product_data.js");
 
 
-for(product_index = 1; eval("typeof name"+product_index) != 'undefined' ; product_index++) {
+for(prod_num = 1; eval("typeof name"+prod_num) != 'undefined' ; prod_num++) {
 
-    console.log(`${product_index}. ${eval('name' + product_index)}`);
+    console.log(`${prod_num}. ${eval('name' + prod_num)}`);
     
 }
 console.log("That's all we have!");
 
 document.write(`
 <table border="1">
-    <tr><th>Number</th><th>Item</th></tr> 
+ <tr><td>${prod_num}</td><td>${eval("name"+prod_num)}</td></tr>
     <tr><td>1</td><td>HTC</td></tr>
     <tr><td>2</td><td>Apple</td></tr>
     <tr><td>3</td><td>Nokia</td></tr>
