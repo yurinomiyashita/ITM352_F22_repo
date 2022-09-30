@@ -28,12 +28,12 @@
 
         <main>
             <script>
-                for (var i=0; i <products.length; i++){
+                for (var i=0; i< products_array.length; i++){
             document.write(`
             <section class="item">
-                <h2>${product[i].name}</h2>
-                <p>\$${product[i].price}</p>
-                <img src=${product[i].image}>
+                <h2>${product[i]["name"]}</h2>
+                <p>\$${product[i]["price"]}</p>
+                <img src= ${product[i]["image"]}>
             </section>
             `);
         }

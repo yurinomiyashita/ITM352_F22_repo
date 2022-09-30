@@ -34,6 +34,6 @@
         };
         
         //product array 
-       products=[product1,product2,product3,product4,product5];
+       var products_array=[product1,product2,product3,product4,product5];
 
-console.log("Product iables loaded...");
+console.log("Product lables loaded...");
