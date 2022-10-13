@@ -34,4 +34,4 @@
         //product array 
         var product_array = [product1, product2, product3, product4, product5];
         var quatities=[0]
-console.log("Product iables loaded...");
+        console.log("Product iables loaded...");

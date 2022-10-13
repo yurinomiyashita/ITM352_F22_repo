@@ -6,11 +6,11 @@ step1=parseInt(amount/25);
 remainder1 = amount%25; 
 
 //devide by dimes 
-step2=parseInt(remainder1/10);
+step2 = parseInt(remainder1/10);
 remainder2 = remainder1%10; 
 
 //devide by nickels
-step3=parseInt(remainder2/5);
+step3 = parseInt(remainder2/5);
 remainder3 = remainder2%5; 
 
 //devide by pennies 

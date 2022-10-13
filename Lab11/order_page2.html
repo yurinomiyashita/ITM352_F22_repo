@@ -1,6 +1,6 @@
 <script>
     function checkQuantityTextbox(theTextbox){
-        document.getElementById(theTextbox.id + '_message').innerHTML=isNonNegInt(theTextbox.value,true).join('_');
+        document.getElementByName(theTextbox.id + '_message').innerHTML=isNonNegInt(theTextbox.value,true).join('_');
     }
 
     function isNonNegInt(q, returnErrors=false){
@@ -23,7 +23,6 @@ isNonNegInt= is not negative integer
 Assignment 1 might be entering space should be different outcome. 
 test every 7 lines or so 
 */
-
 </script>
 
 <!DOCTYPE html>
@@ -35,17 +34,14 @@ test every 7 lines or so
     <title>Document</title>
 </head>
 <body>
-    <label>quantity desired:</label>  
-    <input type="text" id="qty_textbox"  onkeyup="checkQuantityTextbox(this);">  
-    <span id='qty_textbox_message'>Enter a quantity</span>  
-    <br>
-    <input type="button" value="Purchase" onclick="
-    if(isNonNegInt(qty_textbox.value)==true) {
-        document.write(`Thank for you for ordering ${qty_textbox.value} things!`);
-    }
-    ">
-    <br>
-   <input type="checkbox" id="check"> would you like to recieve upcoming events email 
+    <form name="quantity_form" action="./display_purchase.html" method="GET">
+        <label>quantity desired:</label>  
+        <input type="text" name="qty_textbox"  onkeyup="checkQuantityTextbox(this);">  
+        <span id='qty_textbox_message'>Enter a quantity</span>  
+        <br>
+        <input type="submit" value="Purchase">
+        
+    </form>
 </body>
 </html>
 
