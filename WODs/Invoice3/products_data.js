@@ -1,34 +1,37 @@
-        //item 1
-        var item1={
-         'name': "HTC",
+        //product 1
+        var product1={
+         'brand' : "HTC",
          'price' : 40.00,
-        };
-        
-        //item 2
-        var item2={
-        'name' : "Apple",
-        'price' : 75.00,
-        };
-
-        //item 3
-        var item3={
-        'name': "Nokia",
-        'price' : 5.00,
+         };
+        //product 2
+        var product2={
+         'name' : "Apple",
+         'price' : 75.00,
+         //'image' : "http://dport96.github.io/ITM352/morea/080.flow-control-II/iphone-3gs.jpg",
         };
 
-        //item 4
-        var item4={
-        'name': "Samsung",
-        'price' : 5.00,
+        //product 3
+        var product3={
+         'name' : "Nokia",
+         'price' : 5.00,
+         //'image' : "http://dport96.github.io/ITM352/morea/080.flow-control-II/Nokia.jpg",
         };
 
-        //item 5
-        var item5={
-        'name' : "Blackberry",
-        'price' : 10.00,
+        //product 4
+        var product4={
+         'name' : "Samsung",
+         'price' : 5.00,
+         //'image' : "http://dport96.github.io/ITM352/morea/080.flow-control-II/Samsung.jpg",
         };
-        
+
+        //product 5
+        var product5={
+         'name' : "Blackberry",
+         'price' : 10.00,
+         //'image' : "http://dport96.github.io/ITM352/morea/080.flow-control-II/Blackberry.jpg",
+        };
+
         //product array 
-       var item_array=[item1,item2,item3,item4,item5];
-       quantities_array=[1,2,1,1,0]
-console.log("Product lables loaded...");
+        var product_array = [product1, product2, product3, product4, product5];
+        var quatities=[0]
+console.log("Product iables loaded...");
