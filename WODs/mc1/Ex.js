@@ -19,3 +19,5 @@ remainder4 = remainder3%1;
 
 console.log(step1, step2, step3, step4 );
 console.log(remainder4);
+console.log(remainder1); 
+console.log(remainder2); 

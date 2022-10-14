@@ -21,12 +21,12 @@ step1= year;
 
 //step 2 devide step 1 by 4 drop the remainder add to step 1
 step2= parseInt(year/4);
-remiander1= year%4
+remiander1= year%4;
 
 //step 3: devide step 1 by 100 drop the remainder subtract this from step 2
 step3= parseInt(step1/100);
-remainder2= step2%100;
-step=parseInt(step2-remiander2);
+//remainder2= step2%100;
+//step=parseInt(step2-remiander2);
 
 // step 4 divide step 1 by 400 drop the remainder add to step 3
 step4= parseInt(year/400);
@@ -41,5 +41,5 @@ remiander3=
 
 // day of week resulty 
 
-console.log(step1, step2,step3, step);
+console.log(step1, step2,step3);
 console.log(remainder1);
