@@ -30,17 +30,10 @@
         var quantity5 = 12;
         var price5 = 1.89;
       */
-      
-        // Compute extended prices
-        var extended_price1 = quantity1*price1; 
-        var extended_price2 = quantity2*price2; 
-        var extended_price3 = quantity3*price3; 
-        var extended_price4 = quantity4*price4; 
-        var extended_price5 = quantity5*price5; 
-      
+     
         //Compute subtotal 
-        var subtotal=extended_price1 + extended_price2 +extended_price3 + extended_price4 + extended_price5;
-      
+        var subtotal = 0
+
         //Compute tax 
         var tax_rate = 0.0575;
         var tax = tax_rate * subtotal;
@@ -81,50 +74,49 @@
             <th style="text-align: center;" width="54%">extended price</th>
       </tr>
       <script>
-            for (var i=0, i<=4,i++){
-        //product row 1
+          //product row 1
         document.write(`
       <tr>
-            <td width="43%">${product_array[1].brand}</td>
-            <td align="center" width="11%">${quatities[0]}</td>
-            <td width="13%">\$${price1}</td>
+            <td width="43%">${product_array[0]['name']}</td>
+            <td align="center" width="11%">${qty[0]}</td>
+            <td width="13%">\$${product_array[0]['price']}</td>
             <td width="54%">\$${extended_price1}</td>
       </tr>
         `);
-      }
+      
          //product row 2
          document.write(`
       <tr>
-            <td width="43%">${item2}</td>
-            <td align="center" width="11%">${quantity2}</td>
-            <td width="13%">\$${price2}</td>
+            <td width="43%">${product_array[1]['name']}</td>
+            <td align="center" width="11%">${qty[1]}</td>
+            <td width="13%">\$${product_array[1]['price']}</td>
             <td width="54%">\$${extended_price2}</td>
       </tr>
         `);
          //product row 3
          document.write(`
       <tr>
-            <td width="43%">${item3}</td>
-            <td align="center" width="11%">${quantity3}</td>
-            <td width="13%">\$${price3}</td>
+            <td width="43%">${product_array[2]['name']}</td>
+            <td align="center" width="11%">${qty[2]}</td>
+            <td width="13%">\$${product_array[2]['price']}</td>
             <td width="54%">\$${extended_price3}</td>
       </tr>
         `);
          //product row 4
          document.write(`
       <tr>
-            <td width="43%">${item4}</td>
-            <td align="center" width="11%">${quantity4}</td>
-            <td width="13%">\$${price4}</td>
+            <td width="43%">${product_array[3]['name']}</td>
+            <td align="center" width="11%">${qty[3]}</td>
+            <td width="13%">\$${product_array[3]['price']}</td>
             <td width="54%">\$${extended_price4}</td>
       </tr>
         `);
          //product row 5
          document.write(`
       <tr>
-            <td width="43%">${item5}</td>
-            <td align="center" width="11%">${quantity5}</td>
-            <td width="13%">\$${price5}</td>
+            <td width="43%">${product_array[4]['name']}</td>
+            <td align="center" width="11%">${qty[4]}</td>
+            <td width="13%">\$${product_array[4]['price']}</td>
             <td width="54%">\$${extended_price5}</td>
       </tr>
         `);
