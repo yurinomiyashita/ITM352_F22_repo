@@ -12,6 +12,11 @@
      if(params.has('qty_textbox')){
          document.write(`Thank you for ordering ${params.get('qty_textbox')} things`);
      }
+
+     isNonNegInt ('qty_textbox')
+     document.write("Invalid quantity. Press the back button and try again.")
+    
+     
  </script>
 </body>
 </html>
