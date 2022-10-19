@@ -10,13 +10,12 @@
     Output the date and and the day of week to the console.
 
 */
+//setting the date 
+var day= 31; 
+var month = "December";
+var year=2001; 
 
-// setting up the date
-var day=31;
-var month= "December";
-var year= 2001;
-
-const monthkey = {
+var monthkey={
     January:0,
     February:3,
     March:2,
@@ -30,32 +29,28 @@ const monthkey = {
     November:2,
     December:4,
 };
+//step 1: is the year 
+step1=year;
 
-// step 1 is the year 
-step1= year; 
+//step2: devide step 1 by 4 drop the reminader add to step 1
+step2=parseInt(year/4)+step1;
 
-//step 2 devide step 1 by 4 drop the remainder add to step 1
-step2 = parseInt(year/4)+year;
+//step3: devide step 1 by 100, drop the remainer subtract this from step 2
+step3=step2-(parseInt(step1/100));
 
-//step 3: devide step 1 by 100 drop the remainder subtract this from step 2
-step3 = step2-parseInt(year/100);
+//step4: devide step 1 by 400 drop the remainer add to step 3 
+step4=parseInt(step1/400)+step3; 
 
-//remainder2= step2%100;
-//step=parseInt(step2-remiander2);
+// Step 5: add the day to step 4 
+step5=step4+day;
 
-// step 4 divide step 1 by 400 drop the remainder add to step 3
-step4 = parseInt(year/400)+step3;
+//step 6: add month key to step 5 
+step6=monthkey[month]+step5;
 
-//step5 add the day to step 4
-step5 = day+step4; 
+//step 7: divide step 6 by 7 keep only the remainder 
+step7=step6%7; 
 
-//step6 find the month key in the tale and add this to step 5 
-step6 = monthkey[month] + step5;
+var dayofweek=["Sunday","Monday","Tuesday","Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
 
-// step 7 divide step 6 by  7 keep only the remainder 
-step7 = step6%7;
 
-// day of week resulty 
-const daysarray = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-
-console.log(month, day, year, daysarray[step7]); 
+console.log(day,'st', 'of', month, year, dayofweek[step7]);

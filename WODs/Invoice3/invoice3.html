@@ -1,35 +1,5 @@
 <Script >
-        /* 
-        this WODs is due tomorrow. 
-        Invoice 1 is to display a sales invoice from product sales data
-        */
-        //product data 
-      /*
-        // Product 1
-        var item1 = 'Gillette Sensor 3 Razor';
-        var quantity1 = 2;
-        var price1 = 1.23;
-      
-        // Product 2
-        var item2 = 'Barbasol Shaving Cream';
-        var quantity2 = 1;
-        var price2 = 2.64;
-      
-        // Product 3
-        var item3 = 'Nautica Cologne';
-        var quantity3 = 1;
-        var price3 = 6.17;
-      
-        // Product 4
-        var item4 = 'Rubbing Alcohol';
-        var quantity4 = 3;
-        var price4 = 0.98;
-      
-        // Product 5
-        var item5 = 'Colgate Classic Toothbrush';
-        var quantity5 = 12;
-        var price5 = 1.89;
-      */
+       
      
         //Compute subtotal 
         var subtotal = 0
@@ -62,7 +32,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Document</title>
-        <script src="products_data.js"></script>
+        <script src="./products_data.js"></script>
       </head>
       <body>
       <table border="2">
@@ -74,6 +44,37 @@
             <th style="text-align: center;" width="54%">extended price</th>
       </tr>
       <script>
+         function generate_item_rows(product_quantities_array){
+           for (let i in product_quantities_array){
+
+            if (product_quantities_array[i]==0)continue;
+
+            errors=notAPosInt(product_quantities_array[i], true);
+            if(errors.length==0){
+              extended_price=product_quantities_array[i]*products[i].price;
+              var errorMessage="", 
+            }else{
+              extended_price=0*products[i].price;
+              var errorMessage=errors.join('<br>');
+            
+            document.write(`
+            <tr>
+            <td>${products[i].name}</td>
+            <td>${products[i].quantity}<div style="color:red;">${errorMessage}</div></td>
+            <td>$${products[i].price.toFixed(2)}</td>
+            <td>$${extended_price}</td>
+            <tr>
+            `);
+            subtotal+=extended_price;
+            };
+          }
+          function notAPosInt(arrayElement, returnErrors=false){
+            errors=[]; //assume no errors at first 
+            if(Number(arrayElement)!=arrayElement) errors.push('Not a nuber!');
+            if(parseInt(arrayElement<0)error.push)
+          }
+         }
+
           //product row 1
         document.write(`
       <tr>
