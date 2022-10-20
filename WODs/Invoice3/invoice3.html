@@ -32,7 +32,56 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Document</title>
-        <script src="./products_data.js"></script>
+        <script src="products_data.js"></script>
+        <script>
+          function generate_item_rows(product_quantities_array){
+            for (let i in product_quantities_array){
+ 
+             if (product_quantities_array[i]==0)continue;
+ 
+             errors=notAPosInt(product_quantities_array[i], true);
+             if(errors.length==0){
+               extended_price=product_quantities_array[i]*products[i].price;
+               var errorMessage="", 
+             }else{
+               extended_price=0*products[i].price;
+               var errorMessage=errors.join('<br>');
+             
+             document.write(`
+             <tr>
+             <td>${products[i].name}</td>
+             <td>${products[i].quantity}<div style="color:red;">${errorMessage}</div></td>
+             <td>$${products[i].price.toFixed(2)}</td>
+             <td>$${extended_price}</td>
+             <tr>
+             `);
+             subtotal+=extended_price;
+             };
+           }
+           function notAPosInt(arrayElement, returnErrors=false) {
+             errors = []; // assume no errors at first
+             if(Number(arrayElement) != arrayElement) errors.push('Not a number!'); // Check if string is a number value
+             if(arrayElement < 0) errors.push('Negative value!'); // Check if it is non-negative
+             if(parseInt(arrayElement) != arrayElement) errors.push('Not an integer!'); // Check that it is an integer
+           
+             return(returnErrors? errors:(errors.length ==0));
+           };
+ 
+           //subtotal 
+           var subtotal=0;
+          }
+          </script>
+          <style>
+            table {
+                border: 2px solid;
+                width: 500px;
+                height: 200px;
+                text-align: center;
+            }
+            td:nth-child(1) {
+                text-align: left;
+            }
+        </style>
       </head>
       <body>
       <table border="2">
@@ -43,38 +92,7 @@
             <th style="text-align: center;" width="13%">price</th>
             <th style="text-align: center;" width="54%">extended price</th>
       </tr>
-      <script>
-         function generate_item_rows(product_quantities_array){
-           for (let i in product_quantities_array){
-
-            if (product_quantities_array[i]==0)continue;
-
-            errors=notAPosInt(product_quantities_array[i], true);
-            if(errors.length==0){
-              extended_price=product_quantities_array[i]*products[i].price;
-              var errorMessage="", 
-            }else{
-              extended_price=0*products[i].price;
-              var errorMessage=errors.join('<br>');
-            
-            document.write(`
-            <tr>
-            <td>${products[i].name}</td>
-            <td>${products[i].quantity}<div style="color:red;">${errorMessage}</div></td>
-            <td>$${products[i].price.toFixed(2)}</td>
-            <td>$${extended_price}</td>
-            <tr>
-            `);
-            subtotal+=extended_price;
-            };
-          }
-          function notAPosInt(arrayElement, returnErrors=false){
-            errors=[]; //assume no errors at first 
-            if(Number(arrayElement)!=arrayElement) errors.push('Not a nuber!');
-            if(parseInt(arrayElement<0)error.push );
-          }
-         }
-
+      
           //product row 1
         document.write(`
       <tr>
