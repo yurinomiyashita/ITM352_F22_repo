@@ -1,30 +1,3 @@
-<Script >
-       
-     
-        //Compute subtotal 
-        var subtotal = 0
-
-        //Compute tax 
-        var tax_rate = 0.0575;
-        var tax = tax_rate * subtotal;
-
-        //Computer shipping 
-        if(subtotal <=50){
-                shipping=2;
-        }
-       else if(subtotal <=100){
-                shipping =5;
-        }
-        if( subtotal >100){
-                shipping = 0.05*subtotal;  //5% of subtotal 
-        }
-
-      
-        //Compute grand total
-        var total = subtotal + tax; 
-      
-      
-      </Script>
       <!DOCTYPE html>
       <html lang="en">
       <head>
@@ -32,56 +5,10 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Document</title>
-        <script src="products_data.js"></script>
+        <script src="./products_data.js"></script>
         <script>
-          function generate_item_rows(product_quantities_array){
-            for (let i in product_quantities_array){
- 
-             if (product_quantities_array[i]==0)continue;
- 
-             errors=notAPosInt(product_quantities_array[i], true);
-             if(errors.length==0){
-               extended_price=product_quantities_array[i]*products[i].price;
-               var errorMessage="", 
-             }else{
-               extended_price=0*products[i].price;
-               var errorMessage=errors.join('<br>');
-             
-             document.write(`
-             <tr>
-             <td>${products[i].name}</td>
-             <td>${products[i].quantity}<div style="color:red;">${errorMessage}</div></td>
-             <td>$${products[i].price.toFixed(2)}</td>
-             <td>$${extended_price}</td>
-             <tr>
-             `);
-             subtotal+=extended_price;
-             };
-           }
-           function notAPosInt(arrayElement, returnErrors=false) {
-             errors = []; // assume no errors at first
-             if(Number(arrayElement) != arrayElement) errors.push('Not a number!'); // Check if string is a number value
-             if(arrayElement < 0) errors.push('Negative value!'); // Check if it is non-negative
-             if(parseInt(arrayElement) != arrayElement) errors.push('Not an integer!'); // Check that it is an integer
-           
-             return(returnErrors? errors:(errors.length ==0));
-           };
- 
-           //subtotal 
-           var subtotal=0;
-          }
-          </script>
-          <style>
-            table {
-                border: 2px solid;
-                width: 500px;
-                height: 200px;
-                text-align: center;
-            }
-            td:nth-child(1) {
-                text-align: left;
-            }
-        </style>
+              function generate_item_row(product_quantities_array){}
+        </script>
       </head>
       <body>
       <table border="2">
@@ -92,53 +19,70 @@
             <th style="text-align: center;" width="13%">price</th>
             <th style="text-align: center;" width="54%">extended price</th>
       </tr>
-      
-          //product row 1
+      <script>
+        //product row 1
         document.write(`
       <tr>
-            <td width="43%">${product_array[0]['name']}</td>
-            <td align="center" width="11%">${qty[0]}</td>
-            <td width="13%">\$${product_array[0]['price']}</td>
+            <td width="43%">${item1}</td>
+            <td align="center" width="11%">${quantity1}</td>
+            <td width="13%">\$${price1}</td>
             <td width="54%">\$${extended_price1}</td>
       </tr>
         `);
-      
          //product row 2
          document.write(`
       <tr>
-            <td width="43%">${product_array[1]['name']}</td>
-            <td align="center" width="11%">${qty[1]}</td>
-            <td width="13%">\$${product_array[1]['price']}</td>
+            <td width="43%">${item2}</td>
+            <td align="center" width="11%">${quantity2}</td>
+            <td width="13%">\$${price2}</td>
             <td width="54%">\$${extended_price2}</td>
       </tr>
         `);
          //product row 3
          document.write(`
       <tr>
-            <td width="43%">${product_array[2]['name']}</td>
-            <td align="center" width="11%">${qty[2]}</td>
-            <td width="13%">\$${product_array[2]['price']}</td>
+            <td width="43%">${item3}</td>
+            <td align="center" width="11%">${quantity3}</td>
+            <td width="13%">\$${price3}</td>
             <td width="54%">\$${extended_price3}</td>
       </tr>
         `);
          //product row 4
          document.write(`
       <tr>
-            <td width="43%">${product_array[3]['name']}</td>
-            <td align="center" width="11%">${qty[3]}</td>
-            <td width="13%">\$${product_array[3]['price']}</td>
+            <td width="43%">${item4}</td>
+            <td align="center" width="11%">${quantity4}</td>
+            <td width="13%">\$${price4}</td>
             <td width="54%">\$${extended_price4}</td>
       </tr>
         `);
          //product row 5
          document.write(`
       <tr>
-            <td width="43%">${product_array[4]['name']}</td>
-            <td align="center" width="11%">${qty[4]}</td>
-            <td width="13%">\$${product_array[4]['price']}</td>
+            <td width="43%">${item5}</td>
+            <td align="center" width="11%">${quantity5}</td>
+            <td width="13%">\$${price5}</td>
             <td width="54%">\$${extended_price5}</td>
       </tr>
         `);
+      //sales tax
+      var tax_rate=(5.75/100);
+      var tax=subtotal*tax_rate;
+      //shipping
+      if(subtotal <=50){
+                shipping=2;
+        }
+       else if(subtotal <=100){
+                shipping =5;
+        }
+        if( subtotal >100){
+                shipping = 0.05*subtotal;  //5% of subtotal 
+        }
+      //subtotal 
+      var subtotal = 0
+
+      //grandtotal
+      var total=tax+subtotal+shipping; 
       </script>
       <tr>
           <td colspan="4" width="100%">&nbsp;</td>
