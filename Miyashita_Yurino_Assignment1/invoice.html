@@ -1,0 +1,35 @@
+<!--this html to display invoice table -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./products_data.js"></script> <!-- to connect products info-->
+</head>
+<body>
+    <table border="2">
+        <tbody>
+              <tr>
+                    <th style="text-align: center;" width="43%">Item</th>
+                    <th style="text-align: center;" width="11%">quantity</th>
+                    <th style="text-align: center;" width="13%">price</th>
+                    <th style="text-align: center;" width="54%">extended price</th>
+              </tr>
+       
+        <script>
+            for(i=1; i<=5; i++){ // copied and pasted from products_display.html from SmartPhoneProducts1_Loop directory 
+            document.write(`
+            <tr>
+            <td width="43%">${product[i].name}</td>
+            <td align="center" width="11%">${product[i].quanity}<div style="color:red;">${errorMessage}</td>
+            <td width="13%">\$${product[i].price.toFixed(2)}</td>
+            <td width="54%">\$${extended_price}</td>
+            </tr>
+            `);
+        }
+        </script>
+         </tbody>     
+</body>
+</html>
