@@ -49,6 +49,13 @@ product5 = {
         quantity_available:5,
         image: "SevenHusband.jpg",
 },
+product6 = {
+        name: "It Ends with Us",
+        author:"Colleen Hoover",
+        price: 11.98,
+        quantity_available:5,
+        image: "ItEndsWithUs.jpg",
+},
 ]
 //product array 
 var product_array = [product1, product2, product3, product4, product5];

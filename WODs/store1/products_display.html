@@ -11,7 +11,7 @@
 
     <link href="products-style.css" rel="stylesheet">
 </head>
-
+<form action="./invoice3.html" method="GET">
 <body>
     
     <header>
@@ -33,6 +33,8 @@
                 <section class="item">
                 <h2>${product[i].name}</h2>
                 <p>${product[i].price}</p>
+                <lable id="qunatity${i}_label">Quantity</label>
+                <input type="text" placeholder="0" name="quantity${i}">
                 <img src="${product[i].image}">
             </section>
             `);
@@ -40,16 +42,15 @@
         // add texbox to input quantiity 
            </script>
             <label>quantity desired:</label>  
-            <input type="text" id="qty_textbox"  onkeyup="checkQuantityTextbox(this);">  
-            <span id='qty_textbox_message'>Enter a quantity</span>
+            
         </main>
     </div>
     <footer>
-        <input type="checkbox" id="check" required> would you like to recieve upcoming events email 
         
         <h1>
             Your One Stop For Used Phones
         </h1>
+        <center><input type="submit" value="Purchase"></center>
     </footer>
 </body>
 
