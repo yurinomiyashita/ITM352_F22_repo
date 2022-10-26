@@ -1,4 +1,6 @@
+<script src="./products_data.js"></script>
   <script> // product row loop 
+  
             function generate_item_rows(product_quantities_array){
                   for(let i in product_quantities_array){
                   if(product_quantities_array[i]==0)continue;   
@@ -12,6 +14,7 @@
                         extended_price=0*product[i].price;
                         var errorMessage=errors.join('<br>'); 
                   }
+                  
             document.write(`
             <tr>
             <td width="43%">${product[i].name}</td>
