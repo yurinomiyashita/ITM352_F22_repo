@@ -1,8 +1,8 @@
-<script src="./products_data.js"></script>
-  <script> // product row loop 
-  
+ <script src="./products_data.js"></script>
+      <script> // product row loop 
             function generate_item_rows(product_quantities_array){
                   for(let i in product_quantities_array){
+
                   if(product_quantities_array[i]==0)continue;   
 
                   errors= notAPosInt(product_quantities_array[i], true);
@@ -14,7 +14,6 @@
                         extended_price=0*product[i].price;
                         var errorMessage=errors.join('<br>'); 
                   }
-                  
             document.write(`
             <tr>
             <td width="43%">${product[i].name}</td>
@@ -33,21 +32,19 @@
                   if (parseInt(arrayElemet) != arrayElemet) errors.push('Not an integer!'); // Check that it is an integer
                   return(returnErrors? errors:(errors.length==0))
             }
+      //Compute subtotal 
+      var subtotal = 0; 
            
       </script>
+     
       <script>
-            let params = (new URL(document.location)).searchParams;
-            var quantities = [];
-            for(let i in product) {
-              quantities[i] = params.get(`quantity${i}`);
-            }
-          
-            // Compute sub-total
-            var subtotal = 0;
-          
-          
-          </script>
-<!DOCTYPE html>
+      let params = (new URL(document.location)).searchParams; 
+      var quantities=[]; 
+      for (let i in product){
+            quantities[i] = params.get(`quantity${i}`);
+      }
+      </script>
+      <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -55,8 +52,7 @@
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>Document</title>
-      <script src="./products_data.js"></script>
-    
+     
 </head>
 
 <body>
@@ -73,7 +69,7 @@
                   </script>
 
       <Script>     
-     this.innerHTML=generate_item_rows(quantities);
+     this.innerHTML=generate_item_rows(quantities)
 
       //Compute tax 
       var tax_rate = 0.0575;

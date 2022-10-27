@@ -10,10 +10,11 @@
     <link href="https://fonts.googleapis.com/css?family=Cherry+Swash|Raleway" rel="stylesheet">
 
     <link href="products-style.css" rel="stylesheet">
-</head>
-<form action="./invoice3.html" method="GET">
-<body>
     
+</head>
+
+<body>
+    <form action="./invoice.html" method="GET">
     <header>
         <h1>Yurino's Used Smart Phone Store</h1>
     
@@ -27,32 +28,29 @@
         </aside>
 
         <main>
-            <script src="./products_data.js"></script>
-
             <script>
-                for(i=0; i<5; i++){
+                for ( var i = 0; i < product.length; i++){
             document.write(`
                 <section class="item">
                 <h2>${product[i].name}</h2>
-                <p>${product[i].price}</p>
-                <lable id="qunatity${i}_label">Quantity</label>
+                <p>\$${product[i].price}</p>
+                <label id="quantity"${i}_label>Quantity Desired</label>
                 <input type="text" placeholder="0" name="quantity${i}">
                 <img src="${product[i].image}">
             </section>
             `);
         }
-        // add texbox to input quantiity 
            </script>
-            <label>quantity desired:</label>  
-            
+           
+      
+           
         </main>
     </div>
     <footer>
-        
         <h1>
             Your One Stop For Used Phones
         </h1>
-        <center><input type="submit" value="Purchase"></center>
+        <center><input type="submit" value ="purchase"></center>
     </footer>
 </body>
 
