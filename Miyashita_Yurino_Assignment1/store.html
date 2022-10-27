@@ -1,0 +1,114 @@
+<script>
+var product=[
+    //product 1
+    {
+            name: "Atomic Habits",
+            author:"James Clear",
+            price: 11.98,
+            quantity_available:5,
+            image: "./images/AtomicHabits.jpg",
+            description:"",
+    },
+    //product 2
+     {
+            name: "Rich Dad Poor Dad",
+            author:"Robert T Kiyosaki",
+            price: 7.68,
+            quantity_available:5,
+            image: "./images/RichDadPoorDad.jpg",
+            description:"",
+    },
+    
+    //product 3
+    {
+            name: "Crazy Rich Asian",
+            author:"Kevin Kwan",
+            price: 9.99,
+            quantity_available:5,
+            image: "./images/CrazyRichAsian.jpg",
+            description:"", 
+    },
+    
+    //product 4
+    {
+            name: "Talking to Strangers",
+            author:"Malcolm Gladwell",
+            price: 9.65,
+            quantity_available:5,
+            image: "./images/TalkingtoStrangers.jpg",
+            description:"",
+    },
+    
+    //product 5
+    product5 = {
+            name: "Seven Husbands of Evelyn Hugo",
+            author:"Taylor Jekkins Reid",
+            price: 21.92,
+            quantity_available:5,
+            image: "./images/SevenHusband.jpg",
+            description:"",
+    },
+
+    //product6
+    {
+            name: "It Ends with Us",
+            author:"Colleen Hoover",
+            price: 11.98,
+            quantity_available:5,
+            image: "./images/ItEndsWithUs.jpg",
+            description:"",
+    },
+    ]
+    
+    </script>
+<!DOCTYPE html>
+
+<!--this is product display page, free to use any -->
+<!---->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yurino's BookStore</title>
+    <link href="products-style.css" rel="stylesheet">
+    <link href="images/" rel="images">
+   <script src="../products_data.js" type=""></script>
+   <style>
+    body,h1,h2,h3,h4,h5,h6 {font-family: "Karma", sans-serif}
+    .w3-bar-block .w3-bar-item {padding:20px}
+    </style>
+</head>
+<body> 
+    <header>
+        <center><h1>Yurino's Used Smart Phone Store</h1></center>
+    
+    </header>
+    <form action="./invoice.html" method="GET"></form>
+    <script>
+        
+        // Print items on page
+        for(i = 0; i < product.length; i++) {
+            document.write(`
+            <center><div class="col-sm-6">
+            <div class="w3-main w3-content w3-padding" style="max-width:1200px;margin-top:100px">
+            <div class="panel panel-primary">
+            <div class="panel-heading">${product[i].name}</div> by <div class="panel-heading">${product[i].author}</div> 
+            <div class="panel-body"> <img src="${product[i].image}" class="img-responsive" style="width:10%" alt="Image"></div>
+            <div class="panel-footer">${product[i].description}</div>
+            <label id = "quantity${i}_label"> Enter Quantity Desired: </label>
+            
+            <input type = "text"  placeholder = "Quantity Available: ${product[i].quantity_available}" name = "quantity[${i}]" onekeyup="checkQuantityTextbox(this);">
+            
+            </div>
+            </div>
+            </center>
+            `);
+        }
+    </script>
+</body>
+
+<footer>
+    <center><input type="submit" value ="purchase"></center>
+</footer>
+</html>

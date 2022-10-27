@@ -1,2 +1,10 @@
 /* referenced from Bootstrap W3Schols "Online Store" template https://www.w3schools.com/bootstrap/tryit.asp?filename=trybs_temp_store&stacked=h */
 
+/*general */
+
+body,h1,h2,h3,h4,h5,h6{ font-family:"Karma", sans-serif
+}
+.w3-bar-block .w3-bar-item {
+    padding:20px
+}
+ .w3-sidebar{display:none}
