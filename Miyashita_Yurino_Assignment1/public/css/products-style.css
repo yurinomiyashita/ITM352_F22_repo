@@ -4,7 +4,7 @@
  html {
   
     font-family: 'Raleway', sans-serif;
-    background-color: yellow;
+    background-color:rgb(238, 244, 219);
     font-size: 10px;
     
   }
@@ -34,7 +34,7 @@
   
   h2 {
     font-size: 2rem;
-    color: yellow;
+    color:white;
     text-align: right;
     width: 160px;
     position: absolute;
