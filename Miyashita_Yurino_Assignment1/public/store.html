@@ -4,7 +4,9 @@
 <!-- created by Yurino Miyashita-->
 <!-- -->
 
-<script src="../products.json"></script>
+<script src="./products.json" type="text/javascript">
+   
+</script>
 <script>
 
 
@@ -61,7 +63,6 @@
     <link href="images/" rel="images">
     
    <style>
-    body,h1,h2,h3,h4,h5,h6 {font-family: "Karma", sans-serif}
     .w3-bar-block .w3-bar-item {padding:20px}
     </style>
 </head>
@@ -70,21 +71,23 @@
         <!-- Page Header-->
 	<div class="jumbotron">
         <div class="container text-center">
-          <h1>Sunday Bookstore</h1>      
-          <p><strong>bookstore only sells bestsellers</strong></p>
+          <h1><center>Sunday Bookstore</center>></h1>      
+          <p><strong><center>bookstore only sells bestsellers</center></strong></p>
         </div>
       </div>
-      
-      <!-- Navigation Bar -->
-      <nav class="navbar navbar-inverse">
-        <div class="container-fluid">
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>                        
-            </button>
-      
+
+      <!-- Sidebar (hidden by default) -->
+<nav class="w3-sidebar w3-bar-block w3-card w3-top w3-xlarge w3-animate-left" style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
+  <a href="javascript:void(0)" onclick="w3_close()"
+  class="w3-bar-item w3-button">Close Menu</a>
+  <a href="#food" onclick="w3_close()" class="w3-bar-item w3-button">Food</a>
+  <a href="#about" onclick="w3_close()" class="w3-bar-item w3-button">About</a>
+</nav>
+
+<!-- !PAGE CONTENT! -->
+<div class="w3-main w3-content w3-padding" style="max-width:1200px;margin-top:100px">
+
+
       <!-- Navigation Bar -->
           </div>
             <ul class="nav navbar-nav">
@@ -94,13 +97,10 @@
           </div>
         </div>
       </nav>
-  
-        <center><h1>Sunday Bookstore</h1>
-        <h3> we sell bestseller books </h2></center>
+
     </header>
     <form action="./invoice.html" method="GET"></form>
     <script>
-        
         // Print items on page
         for(i = 0; i < products.length; i++) {
             document.write(`
@@ -126,5 +126,6 @@
 <footer>
     <form name="qtyTextbox" action="./purchase" method ="POST">
     <center><input type="submit" value ="purchase" name="purchase_submit" onlick=""></center>
+    </form>
 </footer>
 </html>

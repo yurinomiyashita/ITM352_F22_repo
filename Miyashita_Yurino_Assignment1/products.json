@@ -11,7 +11,7 @@
             "name": "Rich Dad Poor Dad",
             "author":"Robert T Kiyosaki",
             "price": 7.68,
-            "quantity_available":5,
+            "quantity_available":23,
             "image": "./images/RichDadPoorDad.jpg",
             "description":""
     },

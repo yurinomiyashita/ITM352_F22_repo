@@ -1,4 +1,5 @@
-<script src="./products_data.js"></script>
+<script src="../products.json" type="text/javascript"></script>
+<script src=".data/invoice_data.js"></script>
       <script> // product row loop 
             function generate_item_rows(product_quantities_array){
                   for(let i in product_quantities_array){
@@ -11,14 +12,14 @@
                          extended_price=product_quantities_array[i]*product[i].price; 
                         var errorMessage="";
                   } else {   //when there is error, extended price = 0 time price. 
-                        extended_price=0*product[i].price;
+                        extended_price=0*products[i].price;
                         var errorMessage=errors.join('<br>'); 
                   }
             document.write(`
             <tr>
-            <td width="43%">${product[i].name}</td>
+            <td width="43%">${products[i].name}</td>
             <td align="center" width="11%">${quantities[i]}<div style="color:red;">${errorMessage}</td>
-            <td width="13%">\$${product[i].price.toFixed(2)}</td>
+            <td width="13%">\$${products[i].price.toFixed(2)}</td>
             <td width="54%">\$${extended_price}</td>
             </tr>
             `);
@@ -38,9 +39,10 @@
       </script>
      
       <script>
+      //Query string datda ->array 
       let params = (new URL(document.location)).searchParams; 
       var quantities=[]; 
-      for (let i in product){
+      for (let i in products){
             quantities[i] = params.get(`quantity${i}`);
       }
       </script>
