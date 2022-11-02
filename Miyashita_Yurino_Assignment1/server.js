@@ -17,7 +17,7 @@ function notAPosInt(arrayElemet, returnErrors=false){
     if(arrayElemet<0) errors.push('Negative value!'); // Check if it is non-negative
     if (parseInt(arrayElemet) != arrayElemet) errors.push('Not an integer!'); // Check that it is an integer
     return(returnErrors? errors:(errors.length==0))
-};
+}
 
 // Determines input in textbox
 function checkQuantityTextbox(qtyTextbox) {
@@ -30,29 +30,29 @@ function checkQuantityTextbox(qtyTextbox) {
 
 
 // Load Product Data
-   var products = require(__dirname + '/products.json');
+var products = require(__dirname + '/products.json');
    
 // Initialize Quantity
-       products.forEach((prod,i)=>{prod.quantity_available = products[i].quantity_available})
+products.forEach((prod,i)=>{prod.quantity_available = products[i].quantity_available})
 
 // Load Packages
 
    // Load Express Package
-       var express = require('express');
-       var app = express();
+    var express = require('express');
+    var app = express();
 
    // Load Body-Parser Package
-       var parser = require("body-parser");
+    var parser = require("body-parser");
    
    // Load QueryString Package
-       const qs = require('querystring');
+    const qs = require('querystring');
 
 // Get Body
-   app.use(parser.urlencoded({extended: true}));
+app.use(parser.urlencoded({extended: true}));
 
 // Monitor all requests
 
-   app.all('*', function (request, response, next) {
+app.all('*', function (request, response, next) {
    console.log(request.method + ' to ' + request.path);
    next();
    });
@@ -77,10 +77,10 @@ function checkQuantityTextbox(qtyTextbox) {
            }
        }
 
-/* if (!available_quantity) {
+if (!available_quantity) {
        errors['No quantities inputted'] = `Please enter a quantity for Books`;
    }
-*/
+   
 
    let quantity_object = { "quantity" : JSON.stringify(quantities)};
    console.log(Object.keys(errors));

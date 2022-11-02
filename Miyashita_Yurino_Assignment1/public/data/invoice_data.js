@@ -14,4 +14,3 @@ var state = "Hawaii";
 var zipcode = "96822";
 var phone_number = "808 667 8967";
 
-//due dates
