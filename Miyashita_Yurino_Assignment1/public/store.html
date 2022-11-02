@@ -58,7 +58,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yurino's BookStore</title>
+    <title>Sunday Bookstore</title>
     <link href="./css/products-style.css" type="text/css" rel="stylesheet">
     <link href="images/" rel="images">
     
@@ -71,28 +71,19 @@
         <!-- Page Header-->
 	<div class="jumbotron">
         <div class="container text-center">
-          <h1><center>Sunday Bookstore</center>></h1>      
-          <p><strong><center>bookstore only sells bestsellers</center></strong></p>
+        <hr>
+          <h1><center>Sunday Bookstore</center></h1>   
+        <hr>   
+          <p><strong><center>Welcome to Sunday's Bookstore. Currently, we have 6 books on sell</center></strong></p>
         </div>
       </div>
 
-      <!-- Sidebar (hidden by default) -->
-<nav class="w3-sidebar w3-bar-block w3-card w3-top w3-xlarge w3-animate-left" style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
-  <a href="javascript:void(0)" onclick="w3_close()"
-  class="w3-bar-item w3-button">Close Menu</a>
-  <a href="#food" onclick="w3_close()" class="w3-bar-item w3-button">Food</a>
-  <a href="#about" onclick="w3_close()" class="w3-bar-item w3-button">About</a>
-</nav>
-
-<!-- !PAGE CONTENT! -->
-<div class="w3-main w3-content w3-padding" style="max-width:1200px;margin-top:100px">
-
-
       <!-- Navigation Bar -->
-          </div>
-            <ul class="nav navbar-nav">
-              <li><a href="./index.html">Home</a></li>
-              <li class="active"><a href="#">Products</a></li>
+      <nav>
+          <div class="menu">
+            <ul class="menu-list">
+              <li class="menu-list-item"><a href="./index.html">Home</a></li>
+              <li class="menu-list-item" class="active"><a href="#">Products</a></li>
             </ul>
           </div>
         </div>
@@ -104,17 +95,18 @@
         // Print items on page
         for(i = 0; i < products.length; i++) {
             document.write(`
-            <center><div class="col-sm-6">
-            <div class="w3-main w3-content w3-padding" style="max-width:1200px;margin-top:100px">
-            <div class="panel panel-primary">
-            <div class="panel-heading">${products[i].name}</div> by <div class="panel-heading">${products[i].author}</div> 
-            <div class="panel-body"> <img src="${products[i].image}" class="img-responsive" style="width:10%" alt="Image"></div>
-            <div class="panel-footer">${products[i].description}</div>
-            <label id = "quantity${i}_label"> Enter Quantity Desired: </label>
+            <div class="content">
+              <div class="card-list">  <center>
+                <div class="w3-main w3-content w3-padding" style="max-width:1200px;margin-top:100px"> </div>
+                <div class="Image"><div class="overlay"> <img src="${products[i].image}" class="img-responsive" style="width:50%" alt="Image"></div></div>
+                <div class="card-listTitle">${products[i].name}</div> by <div class="panel-heading">${products[i].author}</div> 
+                
+                <div class="card-listText">${products[i].description}</div>
+                <div class="card-listText"><label id = "quantity${i}_label"> Enter Quantity Desired: </label>
             
-            <input type = "text"  placeholder = "Quantity Available: ${products[i].quantity_available}" name = "quantity[${i}]" onekeyup="checkQuantityTextbox(this);">
+                 <div class="input"><input type = "text"  placeholder = "Quantity Available: ${products[i].quantity_available}" name = "quantity[${i}]" onekeyup="checkQuantityTextbox(this);"> </div></div>
             
-            </div>
+              </div>
             </div>
             </center>
             `);
@@ -123,9 +115,13 @@
 </body>
 <br>
 <br>
+
 <footer>
-    <form name="qtyTextbox" action="./purchase" method ="POST">
-    <center><input type="submit" value ="purchase" name="purchase_submit" onlick=""></center>
-    </form>
+    <div class="label"></div>
+       <center> <form name="qtyTextbox" action="./purchase" method ="POST">
+           <input type="submit" value ="purchase" name="purchase_submit" onlick=""></center> 
+        </form>
+    </div>
+
 </footer>
 </html>

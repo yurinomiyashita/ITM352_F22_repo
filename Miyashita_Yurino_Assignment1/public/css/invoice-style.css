@@ -2,14 +2,11 @@ body{
     margin-top:20px;
     color: #484b51;
 }
+
+
 .text-secondary-d1 {
     color: #728299!important;
 }
-.row {
-    display: flex;
-    justify-content: space-between;
-}
-
 .page-header {
     margin: 0 0 1rem;
     padding-bottom: 1rem;
@@ -121,27 +118,16 @@ hr {
 }
 
 .policy {
-   padding: 100px;
+    font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+    align-items: flex-end;
+    text-align: center;
+   
+    font-size: 15px;
+    width: 500px;
+    right: 480px;
+  
+   align-items: center;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

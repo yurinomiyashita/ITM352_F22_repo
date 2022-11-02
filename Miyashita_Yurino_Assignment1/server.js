@@ -1,5 +1,5 @@
 // Determines valid quantity (If "q" is a negative interger)
-function isNonNegInt(q, return_errors = false) {
+/*function isNonNegInt(q, return_errors = false) {
    errors = []; // assume no errors at first
    if (q == '') q = 0; // handle blank inputs as if they are 0
    if (Number(q) != q) errors.push('<b><font color="red">Not a number!</font></b>'); // Check if string is a number value
@@ -7,6 +7,14 @@ function isNonNegInt(q, return_errors = false) {
    if (parseInt(q) != q) errors.push('<b><font color="red">Not an integer!</font></b>'); // Check that it is an integer
    return return_errors ? errors : (errors.length == 0);
 };
+*/
+function notAPosInt(arrayElemet, returnErrors=false){
+    errors = []; // assume no errors at first
+    if (Number(arrayElemet)!=arrayElemet)errors.push('Not a number!');// Check if string is a number value
+    if(arrayElemet<0) errors.push('Negative value!'); // Check if it is non-negative
+    if (parseInt(arrayElemet) != arrayElemet) errors.push('Not an integer!'); // Check that it is an integer
+    return(returnErrors? errors:(errors.length==0))
+}
 
 // Determines input in textbox
 function checkQuantityTextbox(qtyTextbox) {
@@ -65,7 +73,7 @@ function checkQuantityTextbox(qtyTextbox) {
            }
        }
 
-   /*if (!available_quantity) {
+/*if (!available_quantity) {
        errors['No quantities inputted'] = `Please enter a quantity for Books`;
    }
 */

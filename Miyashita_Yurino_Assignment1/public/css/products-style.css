@@ -4,13 +4,15 @@
  html {
   
     font-family: 'Raleway', sans-serif;
-    background-color:rgb(238, 244, 219);
-    font-size: 10px;
+    background-color:white;
+    font-size: 14px;
+    align-items: center;
     
   }
-  
+
+
   body {
-    width: 800px;
+    width: 100%;
     margin: 0 auto;
   }
   
@@ -19,7 +21,7 @@
   
   h1, h2 {
     
-    font-family: 'Cherry Swash', cursive;
+    font-family:serif;
     margin: 0;
     
     text-align: center;
@@ -30,10 +32,11 @@
     font-size: 5rem;
     background-size: 48px 48px;
     background-blend-mode: lighten;
+    color:white;
   }
   
   h2 {
-    font-size: 2rem;
+    font-size: 3rem;
     color:white;
     text-align: right;
     width: 160px;
@@ -46,21 +49,57 @@
   }
   
   p {
-    font-size: 1.5rem;
+    font-size: 2rem;
+  }
+
+
+  header {
+   background-color:#68a3d5;
+    border-bottom: 0;
+  
+  }
+
+  header .h1{
+    color: white;
   }
   
+  footer{
+    font-size: 20px;
+  font-weight: bold;
+  margin: 30px 0;
+  text-align: center;
+}
   
   /* block styling */
   
+  .menu{
+    background-color:#68a3d5;
+    border: 1px;
+    padding:5px;
+    margin-bottom: 30px;
+  }
   
+  .menu-list {
+    text-align: left;
+    font-size: 25px;
+  }
+
+  .menu-list-item{
+    display: inline-block;
+    margin: 0 10px;
+  }
+
+  .menu-list-item a{
+    display: block;
+    font-size: 14px;
+    padding: 10px;
+    background-color: #68a3d5;
+  }
+
   header, aside, main, footer {
     padding: 20px;
   }
   
-  header {
-    border: 5px solid black;
-    border-bottom: 0;
-  }
   
   aside {
     border-right: 5px solid black;
@@ -68,14 +107,47 @@
   
   
   body > div {
-    border: 5px solid black;
-    display: flex;
+   align-items: center;
   }
-  
-  
+
+ .Image{
+   width: 100%;
+ } 
+
+ /*overlay effect (zoom into the picture)*/
+ .overlay{
+ width: 100%;
+ height: 100%;
+ transform: scale(1);
+ transition: .3s ease;
+ } 
+ .Image:hover .overlay{
+    transform: scale(1.2);
+ }
+.content{
+ max-width: 980px;
+ margin-right: auto;
+ margin-left: auto; 
+ display:inline-block;
+ align-items: center;
+}
+
+.card-list{
+ max-width: 320px;
+}
+
+.card-listTitle{
+  font-size: 20px;
+  font-weight: bold;
+  margin: 30px 0;
+  text-align: center;
+}
+.card-listText{
+line-height: 1.6;
+}
+
   footer {
-    border: 5px solid black;
-    border-top: 0;
+    align-items: center;
   }
   
   footer h1 {
@@ -85,6 +157,8 @@
   
   aside {
     flex: 3;
+    padding:unset;
+    
   }
   
   main {
@@ -119,20 +193,20 @@
   section {
     width: 45%;
     margin: 5px;
-    background-color: black;
+    background-color: white;
     position: relative;
     height: 215px;
   }
   
   section p {
     color: yellow;
-    background: black;
+    background: white;
     width: 50px;
     height: 50px;
     line-height: 50px;
     text-align: center;
     border-radius: 50%;
-    box-shadow: 2px 2px 1px yellow;
+    box-shadow: 2px 2px 1px black;
     position: absolute;
     right: 10px;
     bottom: -6px;
@@ -156,22 +230,24 @@
   }
   
   input {
-    background: black;
-    box-shadow: inset 1px 1px 1px white;
-    color: yellow;
-    border: none;
+    background: white;
+    box-shadow: 2px 1px 3px gray;
+    color: black;
+    border:1px;
+    border-color: black;
     padding: 5px;
     width: 201.5px;
+
   }
   
   section input {
-    color: blue;
+    color: black;
     background: rgb(240, 238, 238);
     width: 50px;
     height: 50px;
     line-height: 50px;
     text-align: center;
-    box-shadow: 2px 2px 1px yellow;
+    box-shadow: 25px 2px 1px yellow;
     position: absolute;
     right: 10px;
     bottom: 80px;
@@ -188,3 +264,20 @@
     bottom:110px;
     z-index: 2000;
   } 
+  .label{
+   background-color:#68a3d5;
+  
+  }
+.phone{
+  font-size: 15px;
+  font-weight:lighter;
+  margin: 30px 0;
+  text-align: center;
+}
+
+.email{
+  font-size: 15px;
+  font-weight:lighter;
+  margin: 0;
+  text-align: center;
+}
