@@ -17,7 +17,7 @@ function notAPosInt(arrayElemet, returnErrors=false){
     if(arrayElemet<0) errors.push('Negative value!'); // Check if it is non-negative
     if (parseInt(arrayElemet) != arrayElemet) errors.push('Not an integer!'); // Check that it is an integer
     return(returnErrors? errors:(errors.length==0))
-}
+};
 
 // Determines input in textbox
 function checkQuantityTextbox(qtyTextbox) {
@@ -66,7 +66,7 @@ function checkQuantityTextbox(qtyTextbox) {
        var available_quantity = false;
 
        for (i in quantities) {
-           if (isNonNegInt(quantities[i]) == false) {
+           if (notAPosInt(quantities[i]) == false) {
                errors['quantity' + i +'_label'] = `Submit a valid quantity for ${products[i].name}!`
            }
            if (quantities[i] > 0) {

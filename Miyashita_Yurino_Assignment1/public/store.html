@@ -113,9 +113,10 @@
                 <div class="card-listTitle">${products[i].name}</div> by <div class="panel-heading">${products[i].author}</div> 
                 
                 <div class="card-listText">${products[i].description}</div>
-                <div class="card-listText"><label id = "quantity${i}_label"> Enter Quantity Desired: </label>
-            
-                 <div class="input"><input type = "text"  placeholder = "Quantity Available: ${products[i].quantity_available}" name = "quantity[${i}]" onekeyup="checkQuantityTextbox(this);"> </div></div>
+                <div class="card-listText">
+                  <label id = "quantity${i}_label"> Enter Quantity Desired: </label>
+                  <div class="input"><input type = "text"  placeholder = "Quantity Available: ${products[i].quantity_available}" name = "quantity[${i}]" onekeyup="checkQuantityTextbox(this);"></div>
+                </div>
             
               </div>
             </div>
