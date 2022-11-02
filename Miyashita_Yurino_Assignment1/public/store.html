@@ -1,3 +1,5 @@
+<!--created by Yurino Miyashhita-->
+<!-- based on Blake Saari's -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,7 +21,15 @@
 	            if (parseInt(q) != q) errors.push('<b><font color="red">Not an integer!</font></b>'); // Check that it is an integer
 	            return return_errors ? errors : (errors.length == 0);
 	        };
-	
+    /*  same as above but using notAPosInt    
+    function notAPosInt(arrayElemet, returnErrors=false){
+        errors = []; // assume no errors at first
+         if (Number(arrayElemet)!=arrayElemet)errors.push('Not a number!');// Check if string is a number value
+          if(arrayElemet<0) errors.push('Negative value!'); // Check if it is non-negative
+          if (parseInt(arrayElemet) != arrayElemet) errors.push('Not an integer!'); // Check that it is an integer
+          return(returnErrors? errors:(errors.length==0))
+            };
+	*/
 	    // Determines input in textbox
 	        function checkQuantityTextbox(qtyTextbox) {
 	            errs = isNonNegInt(qtyTextbox.value, true);
@@ -90,9 +100,10 @@
       </nav>
 
     </header>
-    <form action="./invoice.html" method="GET"></form>
+    <form action="./invoice.html" method="POST"　action=""></form>
     <script>
         // Print items on page
+        //based on store 1 WODs product_display.html 
         for(i = 0; i < products.length; i++) {
             document.write(`
             <div class="content">

@@ -1,3 +1,6 @@
+//created by Yurino Miyashita 
+//modified Blake Saari's server.js 
+
 // Determines valid quantity (If "q" is a negative interger)
 /*function isNonNegInt(q, return_errors = false) {
    errors = []; // assume no errors at first
@@ -55,6 +58,7 @@ function checkQuantityTextbox(qtyTextbox) {
    });
 
 // Process purchase request (validate quantities, check quantity available)
+// I changed from 'quantity_' + i to 'quantity' + i +'_label'
 
    app.post("/purchase", function(request, response, next) {
        var quantities = request.body['quantity'];
@@ -63,20 +67,21 @@ function checkQuantityTextbox(qtyTextbox) {
 
        for (i in quantities) {
            if (isNonNegInt(quantities[i]) == false) {
-               errors['quantity_' + i] = `Submit a valid quantity for ${products[i].name}!`
+               errors['quantity' + i +'_label'] = `Submit a valid quantity for ${products[i].name}!`
            }
            if (quantities[i] > 0) {
                available_quantity = true;
            }
            if (quantities[i] > products[i].quantity_available) {
-               errors['available_' + i] = `We don't have ${(quantities[i])} ${products[i].name} ready to ship, order less or check our stock later!`
+               errors['quantity' + i +'_label'] = `We don't have ${(quantities[i])}${products[i].name} ready to ship, order less or check our stock later!`
            }
        }
 
-/*if (!available_quantity) {
+/* if (!available_quantity) {
        errors['No quantities inputted'] = `Please enter a quantity for Books`;
    }
 */
+
    let quantity_object = { "quantity" : JSON.stringify(quantities)};
    console.log(Object.keys(errors));
        if (Object.keys(errors).length == 0) {
@@ -106,3 +111,5 @@ function checkQuantityTextbox(qtyTextbox) {
 
 // Start server
    app.listen(8080, () => console.log(`listening on port 8080`));
+
+   
