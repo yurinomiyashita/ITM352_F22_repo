@@ -21,14 +21,15 @@
 	            return return_errors ? errors : (errors.length == 0);
 	        };
    
-	    // Determines input in textbox
+	    /* Determines input in textbox
 	        function checkQuantityTextbox(qtyTextbox) {
 	            errs = isNonNegInt(qtyTextbox.value, true);
 	            if (errs.length == 0) errs = ['Want to purchase: '];
 	            if (qtyTextbox.value.trim() == '') errs = ['Type desired quantity: '];
 	            document.getElementById(qtyTextbox.name + '_label').innerHTML = errs.join('<font color="red">, </font>');
 	        };
-	   
+	   */
+    
 	    // Derived from Example Assignment 1
 	        let params = (new URL(document.location)).searchParams;
 	        window.onload = function () {
