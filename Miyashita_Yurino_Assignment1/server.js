@@ -1,25 +1,20 @@
 //created by Yurino Miyashita 
 //modified Blake Saari's server.js 
 
-// Determines valid quantity (If "q" is a negative interger)
-/*function isNonNegInt(q, return_errors = false) {
-   errors = []; // assume no errors at first
-   if (q == '') q = 0; // handle blank inputs as if they are 0
-   if (Number(q) != q) errors.push('<b><font color="red">Not a number!</font></b>'); // Check if string is a number value
-   if (q < 0) errors.push('<b><font color="red">Negative value!</font></b>'); // Check if it is non-negative
-   if (parseInt(q) != q) errors.push('<b><font color="red">Not an integer!</font></b>'); // Check that it is an integer
-   return return_errors ? errors : (errors.length == 0);
-};
-*/
+
+
+//determine if there is error in quantity text box.
+//copied from invoice.html in store 1 direcotry and modified 
 function notAPosInt(arrayElemet, returnErrors=false){
-    errors = []; // assume no errors at first
-    if (Number(arrayElemet)!=arrayElemet)errors.push('Not a number!');// Check if string is a number value
-    if(arrayElemet<0) errors.push('Negative value!'); // Check if it is non-negative
-    if (parseInt(arrayElemet) != arrayElemet) errors.push('Not an integer!'); // Check that it is an integer
+    errors = [];      // [] is to display below if functions,  assume no errors at first
+    if (arrayElemet==''){arrayElemet=0;}      //assume there was no entry on texbox
+    if (Number(arrayElemet)!=arrayElemet)errors.push('Not a number!');    // Check if string is a number value
+    if(arrayElemet<0) errors.push('Negative value!');    // Check if it is non-negative
+    if (parseInt(arrayElemet) != arrayElemet) errors.push('Not an integer!');    // Check that it is an integer
     return(returnErrors? errors:(errors.length==0))
 }
 
-// Determines input in textbox
+// Determines entry in textbox
 function checkQuantityTextbox(qtyTextbox) {
    errs = isNonNegInt(qtyTextbox.value, true);
    if (errs.length == 0) errs = ['Want to purchase: '];
@@ -29,13 +24,12 @@ function checkQuantityTextbox(qtyTextbox) {
 
 
 
-// Load Product Data
-var products = require(__dirname + '/products.json');
+// Load Product Data   
+var products = require(__dirname + '/products.json');    
    
 // Initialize Quantity
 products.forEach((prod,i)=>{prod.quantity_available = products[i].quantity_available})
 
-// Load Packages
 
    // Load Express Package
     var express = require('express');
@@ -61,39 +55,37 @@ app.all('*', function (request, response, next) {
 // I changed from 'quantity_' + i to 'quantity' + i +'_label'
 
    app.post("/purchase", function(request, response, next) {
-       var quantities = request.body['quantity'];
+       console.log(request.body);        //getting request from invoice.html body 
+       var quantities = request.body['quantity'];   //assigning value to quantities as quantity entred in store.html textbox
        var errors = {};
-       var available_quantity = false;
+       var available_quantity = false; 
 
        for (i in quantities) {
            if (notAPosInt(quantities[i]) == false) {
-               errors['quantity' + i +'_label'] = `Submit a valid quantity for ${products[i].name}!`
+               errors['quantity' + i ] = `Please submit valid data for ${products[i].name}!`      //if quantity enetred is invalid number 
            }
-           if (quantities[i] > 0) {
+           if (quantities[i] > 0) {   //if quantity entered is greater than, meaning no errors
                available_quantity = true;
            }
-           if (quantities[i] > products[i].quantity_available) {
-               errors['quantity' + i +'_label'] = `We don't have ${(quantities[i])}${products[i].name} ready to ship, order less or check our stock later!`
+           if (quantities[i] > products[i].quantity_available) {  //if quantity entered is greater than quantity available 
+               errors['quantity' + i ] = `We currenly don't have ${(quantities[i])}${products[i].name}. please check our website later!`
            }
        }
 
-if (!available_quantity) {
-       errors['No quantities inputted'] = `Please enter a quantity for Books`;
-   }
-   
 
-   let quantity_object = { "quantity" : JSON.stringify(quantities)};
+    //
+   let quantity_object = { "quantity" : JSON.stringify(quantities)};    //creating string by quantity_object
    console.log(Object.keys(errors));
-       if (Object.keys(errors).length == 0) {
-       for (i in quantities) {
+       if (Object.keys(errors).length == 0) {    //no errors, 
+       for (i in quantities) {   //remove purchase quantity from inventory
            products[i].quantity_available -= Number(quantities[i]);
-       }
-       response.redirect('./invoice.html?' + qs.stringify(quantity_object));
-   }
-       else {
-           let errors_obj = { "errors": JSON.stringify(errors) };
+       } //sends invoice with quantity with quary string
+       response.redirect('./invoice.html?' + qs.stringify(quantity_object));      //inserting value as quary string to invoice.html table 
+   } 
+       else {   //with errors, redirect to store.html  
+           let errors_obj = { "errors": JSON.stringify(errors) }; 
            console.log(qs.stringify(quantity_object));
-           response.redirect('./store.html?' + qs.stringify(quantity_object) + '&' + qs.stringify(errors_obj));
+           response.redirect('./store.html?' + qs.stringify(quantity_object) + '&' + qs.stringify(errors_obj));    //redirect to store.html and display errors 
        }
    });
 

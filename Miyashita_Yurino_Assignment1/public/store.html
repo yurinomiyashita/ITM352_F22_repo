@@ -3,7 +3,6 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<!-- created by Yurino Miyashita-->
 <!-- -->
 
 <script src="./products.json" type="text/javascript">
@@ -12,8 +11,8 @@
 <script>
 
 
-     // Determines valid quantity (If "q" is a negative interger)
-     function isNonNegInt(q, return_errors = false) {
+  // Determines valid quantity (If "q" is a negative interger)
+    function isNonNegInt(q, return_errors = false) {
 	            errors = []; // assume no errors at first
 	            if (q == '') q = 0; // handle blank inputs as if they are 0
 	            if (Number(q) != q) errors.push('<b><font color="red">Not a number!</font></b>'); // Check if string is a number value
@@ -21,15 +20,7 @@
 	            if (parseInt(q) != q) errors.push('<b><font color="red">Not an integer!</font></b>'); // Check that it is an integer
 	            return return_errors ? errors : (errors.length == 0);
 	        };
-    /*  same as above but using notAPosInt    
-    function notAPosInt(arrayElemet, returnErrors=false){
-        errors = []; // assume no errors at first
-         if (Number(arrayElemet)!=arrayElemet)errors.push('Not a number!');// Check if string is a number value
-          if(arrayElemet<0) errors.push('Negative value!'); // Check if it is non-negative
-          if (parseInt(arrayElemet) != arrayElemet) errors.push('Not an integer!'); // Check that it is an integer
-          return(returnErrors? errors:(errors.length==0))
-            };
-	*/
+   
 	    // Determines input in textbox
 	        function checkQuantityTextbox(qtyTextbox) {
 	            errs = isNonNegInt(qtyTextbox.value, true);
@@ -42,7 +33,6 @@
 	        let params = (new URL(document.location)).searchParams;
 	        window.onload = function () {
 	            
-	          
 	        if (params.has('errors')) {
 	            var errors = JSON.parse(params.get('errors'));
 	            let err_str = '';
@@ -53,14 +43,7 @@
 	          }
 	        }
 	    
-	    // Put available quantity in textbox (retreived from products.json)
-	        if (params.has('quantity')) {
-	            var quantities = JSON.parse(params.get('quantity'));
-	            for (i in quantities) {
-	                qtyTextbox[`quantity${i}`].value = quantities[i];
-	                checkQuantityTextbox(qtyTextbox[`quantity${i}`]);
-	            }
-	        }
+	
     </script>
 
 
@@ -100,7 +83,7 @@
       </nav>
 
     </header>
-    <form action="./invoice.html" method="POST"　action=""></form>
+    <form action="./purchase" method="POST">
     <script>
         // Print items on page
         //based on store 1 WODs product_display.html 
@@ -108,11 +91,12 @@
             document.write(`
             <div class="content">
               <div class="card-list">  <center>
-                <div class="w3-main w3-content w3-padding" style="max-width:1200px;margin-top:100px"> </div>
+                <div style="max-width:1200px;margin-top:100px"> </div>
                 <div class="Image"><div class="overlay"> <img src="${products[i].image}" class="img-responsive" style="width:50%" alt="Image"></div></div>
                 <div class="card-listTitle">${products[i].name}</div> by <div class="panel-heading">${products[i].author}</div> 
                 
                 <div class="card-listText">${products[i].description}</div>
+              
                 <div class="card-listText">
                   <label id = "quantity${i}_label"> Enter Quantity Desired: </label>
                   <div class="input"><input type = "text"  placeholder = "Quantity Available: ${products[i].quantity_available}" name = "quantity[${i}]" onekeyup="checkQuantityTextbox(this);"></div>
@@ -130,7 +114,7 @@
 
 <footer>
     <div class="label"></div>
-       <center> <form name="qtyTextbox" action="./purchase" method ="POST">
+       <center> 
            <input type="submit" value ="purchase" name="purchase_submit" onlick=""></center> 
         </form>
     </div>

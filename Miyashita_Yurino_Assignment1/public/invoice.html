@@ -1,23 +1,23 @@
 <!--this invoice is based on Bootdey company invoice template-->
-<!--this is a link to template https://www.bootdey.com/snippets/view/company-invoice-->
+<!--this is a link to template https://www.bootdey.com/snippets/view/company-invoice  
+    copied both html and css into  invoice.html   and  invoice-style.css   -->
 
-<!-- Load Product Data -->
-<script src="../products.json"></script>
-
-<!-- Load Company Data from data file -->
-    <script src="./data/invoice_data.js"></script>
+<!--loading product data -->
+    <script src="../products.json"></script>
 
 <!-- loading cascading style sheet-->
     <link rel="stylesheet" href="./css/invoice-style.css">
-<script src="../server.js"></script>
+
+<!-- identifying which type of files used -->
+    <script type="text/javascript"> </script>
+
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <!--  This file has been downloaded from bootdey.com @bootdey on twitter -->
-    <!--  All snippets are MIT license http://bootdey.com/license -->
-    <title>Invoice</title>
+       
+    <title>Invoice</title>    
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -25,7 +25,7 @@
 </head>
 <body>
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
-<form name="qtyTextbox" action="" method="GET"> </form>
+<form name="qtyTextbox" action="/purchase" method="GET"> </form>  <!--loading quantity entered on store.html through server-->
 <div class="page-content container">
     <div class="page-header text-blue-d2">
 
@@ -35,7 +35,7 @@
             </div>
         </div>
     </div>
-
+<!-- display header of invoice-->
     <div class="container px-0">
         <div class="row mt-4">
             <div class="col-12 col-lg-12">
@@ -47,10 +47,9 @@
                     </div>
                 </div>
 
-                <!-- .row -->
 
                 <hr class="row brc-default-l1 mx-n1 mb-4" />
-
+                <!-- display company information on the right side -->
                 <div class="row">
                     <div class="col-sm-6">
                         <div>
@@ -59,37 +58,19 @@
                         </div>
                         <div class="text-grey-m2">
                             <div class="my-1">
-                                <script>
-                                    document.write(`
-                                    ${street}
-                                    `)
-                                </script>
+                                344 Kaimuki Av
                             </div>
-                            <div class="my-1">
-                                <script>
-                                    document.write(`
-                                    ${city}, ${state} ${zipcode}
-                                    `)
-                                </script>
+                            <div class="my-1"></div>
+                                Honolulu, HI 96822
                             </div>
-                            <div class="my-1"><i class="fa fa-phone fa-flip-horizontal text-secondary"></i> <b class="text-600"><script>
-                                document.write(`${phone_number}`)
-                            </script></b></div>
+                            <div class="my-1"><i class="fa fa-phone fa-flip-horizontal text-secondary"></i> <b class="text-600">808 909 8888</b></div>
                         </div>
                     </div>
-                    <!-- /.col -->
-
-                    <div class="text-95 col-sm-6 align-self-start d-sm-flex justify-content-end">
-                        <hr class="d-sm-none" />
-                        <div class="text-grey-m2">
-
-                            <div class="my-2"><i class="fa fa-circle text-blue-m2 text-xs mr-1"></i> <span class="text-600 text-90">Issue Date:</span> <script> document.write(today) </script> </div>
-
-                        </div>
-                    </div>
-                    <!-- /.col -->
                 </div>
 
+
+
+            <!--invoice table display-->
                 <div class="table-responsive">
                     <table class="table table-striped table-borderless border-0 border-b-2 brc-default-l1">
                         <thead class="bg-none bgc-default-tp1">
@@ -97,33 +78,30 @@
                                 <th class="opacity-2">#</th>
                                 <th>Description</th>
                                 <th>Qty</th>
-                                <th>Unit Price</th>
-                                <th width="140">Amount</th>
+                                <th>Price</th>
+                                <th width="140">Extended price</th>
                             </tr>
                         </thead>
+                        
                         <script>
-                            
-                            //not working
-                            // Query String Data -> Array
-                                let params = (new URL(document.location)).searchParams;
-                                    var quantities = [];
-                                    for (let i in products){
-                                    if (params.has("quantity")) {
-                                        quantities[i]= JSON.parse(params.get(`quantity${i}`));
-                                        };
-                                    }
-                                    
+                        // taking quary string to array 
+                        // copied from invoice.html from store 1 WODs
+                            let params = (new URL(document.location)).searchParams;
+                            var quantities = JSON.parse(params.get("quantity"));
                         </script>
-                    <script> 
+
+
+                        <script> 
                         var subtotal = 0;
                         for (i = 0; i < products.length; i++) {
-                            var extended_price = (products[i].price * quantities[i])
-                            subtotal = subtotal + extended_price;
-                            if (quantities[i] != 0) {
+                            var extended_price = (products[i].price * quantities[i]) //calculate extended price = quantity entered times product price 
+                            subtotal = subtotal + extended_price;    //calculate subtotal 
+                            if (quantities[i] != 0) {      //i is not qual to 0 
                                 document.write(`
                                 <tbody class="text-95 text-secondary-d3">
                                 <tr></tr>
                             <tr>
+                                <td>${[i+1]}</td>
                                 <td>${[i+1]}</td>
                                 <td>${products[i]['name']}</td>
                                 <td>${quantities[i]}</td>
@@ -132,20 +110,9 @@
                             </tr> 
                             </tbody>
                            `);
-                           subtotal += extended_price; 
-            };
-            }
 
-            //taken from store 1 invioce.html
-            function notAPosInt(arrayElemet, returnErrors=false){
-                  errors = []; // assume no errors at first
-                  if (Number(arrayElemet)!=arrayElemet)errors.push('Not a number!');// Check if string is a number value
-                  if(arrayElemet<0) errors.push('Negative value!'); // Check if it is non-negative
-                  if (parseInt(arrayElemet) != arrayElemet) errors.push('Not an integer!'); // Check that it is an integer
-                  return(returnErrors? errors:(errors.length==0))
-            }
-                                                    
-                    
+                             };
+                        }    
                         </script>
 
                     </table>
@@ -155,21 +122,27 @@
                     </div>
 
                    <script>
-                        var tax = (subtotal * 0.045)
-                        var shipping = 0;
-                        // Subtotal if less than $20
-                            if (subtotal < 20){
-                                shipping = 3;
-                            // Subtotal if less than $50 and over $20
-                            } else if (subtotal >= 20 && subtotal < 50){ 
-                                shipping = 5;
-                            // Subtotal if more than $50
-                            } else if (subtotal >= 50) {
-                                shipping = subtotal * 0.05;
-                            }
-                        // Total Calculations
-                            var total = (subtotal + shipping + tax)
-                            
+                    //taken from invoice.html from store 1 WODs 
+                    //Compute tax 
+                    var tax_rate = 0.05;
+                    var tax = tax_rate * subtotal;
+
+                    //Computer shipping 
+                    if (subtotal <= 15) {     //when shipping is less than $15, then shipping costs $3
+                     shipping = 3;            
+                        }
+                    else if (subtotal <= 50) {    //when shipping is less than  equal to $50, then shipping costs $5
+                    shipping = 5;                 
+                    }
+                    else {
+                    shipping = 0.05 * subtotal;     //other than conditions above, shipping is 4% of subtotal    
+                    }
+
+
+                    //Compute grand total
+                     var total = subtotal + tax + shipping;
+
+
                         document.write(`    
                         <div class="col-12 col-sm-10 text-grey text-90 order-first order-sm-last">
                             <div class="row my-2">
@@ -219,26 +192,19 @@
     <center><table class = "policy">               
         <tr>
             <td colspan="4"> <strong>
-                <br>
+                <br> <!-- explains Sunday Bookstore policy -->
                 SUNDAY BOOKSTORE POLICY:
                 </br>
                 <br>
                 Return only available until a month of purchase
                 </br>
                 <br>
-                A subtotal $0 - $250 will be charged $15 for shipping.
-                <br>
-                A subtotal $250 - $500 will be charged $25 for shipping.
-                <br>
-                A subtotal over $500 will be charged 15% of the subtotal.
+               Thank you for purchasing!
                 </br>
             </strong>
         </tr>
     </table> 
 </center>
 </style>
-
-<script type="text/javascript">
-</script>
 </body>
 </html>

@@ -1,13 +1,11 @@
  /* General */
- 
+ /* taken by products-style.css from store1 WODs and modified by me */
 
  html {
   
     font-family: 'Raleway', sans-serif;
     background-color:white;
     font-size: 14px;
-    align-items: center;
-    
   }
 
 
@@ -114,7 +112,7 @@
    width: 100%;
  } 
 
- /*overlay effect (zoom into the picture)*/
+ /*overlay effect (zoom into the picture when mouse touches images)*/
  .overlay{
  width: 100%;
  height: 100%;
@@ -124,12 +122,15 @@
  .Image:hover .overlay{
     transform: scale(1.2);
  }
+
+
+/* display position is based on Youtube video (https://youtu.be/DtaWQTr2lNI) created by 動画でtorikumu */
 .content{
  max-width: 980px;
  margin-right: auto;
  margin-left: auto; 
  display:inline-block;
- align-items: center;
+ align-content: center;
 }
 
 .card-list{
@@ -142,6 +143,7 @@
   margin: 30px 0;
   text-align: center;
 }
+
 .card-listText{
 line-height: 1.6;
 }
