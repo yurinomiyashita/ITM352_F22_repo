@@ -1,36 +1,15 @@
 <!--created by Yurino Miyashhita-->
-<!-- based on Blake Saari's -->
 <!DOCTYPE html>
 <html lang="en">
 
-<!-- -->
+<!-- load products data -->
 
-<script src="./products.json" type="text/javascript">
-   
-</script>
+<script src="./products.json" type="text/javascript"> </script>
+
+
 <script>
-
-
-  // Determines valid quantity (If "q" is a negative interger)
-    function isNonNegInt(q, return_errors = false) {
-	            errors = []; // assume no errors at first
-	            if (q == '') q = 0; // handle blank inputs as if they are 0
-	            if (Number(q) != q) errors.push('<b><font color="red">Not a number!</font></b>'); // Check if string is a number value
-	            if (q < 0) errors.push('<b><font color="red">Negative value!</font></b>'); // Check if it is non-negative
-	            if (parseInt(q) != q) errors.push('<b><font color="red">Not an integer!</font></b>'); // Check that it is an integer
-	            return return_errors ? errors : (errors.length == 0);
-	        };
-   
-	    /* Determines input in textbox
-	        function checkQuantityTextbox(qtyTextbox) {
-	            errs = isNonNegInt(qtyTextbox.value, true);
-	            if (errs.length == 0) errs = ['Want to purchase: '];
-	            if (qtyTextbox.value.trim() == '') errs = ['Type desired quantity: '];
-	            document.getElementById(qtyTextbox.name + '_label').innerHTML = errs.join('<font color="red">, </font>');
-	        };
-	   */
-    
-	    // Derived from Example Assignment 1
+	// Derived from Example Assignment 1
+  //display error function from server.js
 	        let params = (new URL(document.location)).searchParams;
 	        window.onload = function () {
 	            
@@ -43,8 +22,6 @@
 	            alert(err_str);
 	          }
 	        }
-	    
-	
     </script>
 
 
@@ -63,7 +40,7 @@
 <body> 
     <header>
         <!-- Page Header-->
-	<div class="jumbotron">
+	     <div class="jumbotron">
         <div class="container text-center">
         <hr>
           <h1><center>Sunday Bookstore</center></h1>   
@@ -76,7 +53,7 @@
       <nav>
           <div class="menu">
             <ul class="menu-list">
-              <li class="menu-list-item"><a href="./index.html">Home</a></li>
+              <li class="menu-list-item"><a href="./index.html">Home</a></li>  <!--connect index.html-->
               <li class="menu-list-item" class="active"><a href="#">Products</a></li>
             </ul>
           </div>
@@ -95,7 +72,6 @@
                 <div style="max-width:1200px;margin-top:100px"> </div>
                 <div class="Image"><div class="overlay"> <img src="${products[i].image}" class="img-responsive" style="width:50%" alt="Image"></div></div>
                 <div class="card-listTitle">${products[i].name}</div> by <div class="panel-heading">${products[i].author}</div> 
-                
                 <div class="card-listText">${products[i].description}</div>
               
                 <div class="card-listText">

@@ -5,7 +5,9 @@
 
 //determine if there is error in quantity text box.
 //copied from invoice.html in store 1 direcotry and modified 
+
 function notAPosInt(arrayElemet, returnErrors=false){
+
     errors = [];      // [] is to display below if functions,  assume no errors at first
     if (arrayElemet==''){arrayElemet=0;}      //assume there was no entry on texbox
     if (Number(arrayElemet)!=arrayElemet)errors.push('Not a number!');    // Check if string is a number value
@@ -52,7 +54,6 @@ app.all('*', function (request, response, next) {
    });
 
 // Process purchase request (validate quantities, check quantity available)
-// I changed from 'quantity_' + i to 'quantity' + i +'_label'
 
    app.post("/purchase", function(request, response, next) {
        console.log(request.body);        //getting request from invoice.html body 
