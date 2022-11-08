@@ -74,6 +74,7 @@ if (quantities[i] > products[i].quantity_available) { //if quantity entered is g
 }
 
 //taking quantity entered to display in invoice and direct to log in page
+//changed login.html from invoice.html
 let quantity_object = {   
 "quantity": JSON.stringify(quantities)
 };                                                                            //creating string by quantity_object
