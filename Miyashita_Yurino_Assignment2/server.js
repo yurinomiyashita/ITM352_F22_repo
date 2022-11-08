@@ -25,7 +25,7 @@ next();
 app.use(express.static(__dirname + '/public'));
 
 // Load Product Data   
-var products = require(__dirname + '/products.json');
+var products = require(__dirname + '/products.json'); 
 
 // Initialize Quantity
 products.forEach((prod, i) => {
@@ -73,7 +73,7 @@ if (quantities[i] > products[i].quantity_available) { //if quantity entered is g
 }
 }
 
-//taking quantity entered to display in invoice
+//taking quantity entered to display in invoice and direct to log in page
 let quantity_object = {   
 "quantity": JSON.stringify(quantities)
 };                                                                            //creating string by quantity_object
@@ -82,8 +82,8 @@ if (Object.keys(errors).length == 0) {                                          
 for (i in quantities) {                                                      //remove purchase quantity from inventory
   products[i].quantity_available -= Number(quantities[i]);
 }                                                                            //sends invoice with quantity with quary string
-response.redirect('./invoice.html?' + qs.stringify(quantity_object));       //inserting value as quary string to invoice.html table 
-} else {                                                                      //with errors, redirect to store.html  
+response.redirect('./login.html?' + qs.stringify(quantity_object));       //inserting value as quary string to invoice.html table 
+} else {                                                                      //with errors, redirect to login.html  
 let errors_obj = {
   "errors": JSON.stringify(errors)
 };
