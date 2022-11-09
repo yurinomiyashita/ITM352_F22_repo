@@ -100,9 +100,9 @@
                                 document.write(`
                                 <tbody class="text-95 text-secondary-d3">
                                 <tr></tr>
-                            <tr>
+                                <tr>
                                 <td>${[i+1]}</td>
-                                <td>${products[i]['name']}</td>
+                                <td><img src="${products[i].image}" style="width:5%" alt="Image">${products[i]['name']}</td>
                                 <td>${quantities[i]}</td>
                                 <td class="text-95">$${products[i]['price'].toFixed(2)}</td>
                                 <td class="text-secondary-d2">$${(products[i]['price'] * quantities[i]).toFixed(2)}</td>
