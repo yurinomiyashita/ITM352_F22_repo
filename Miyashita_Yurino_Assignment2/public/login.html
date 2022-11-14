@@ -7,8 +7,21 @@
   <title>Log in</title>
   <!--load cascading style sheet-->
   <link rel="stylesheet" href="./css/login-style.css">
+  <script>
+    // taken from Example Assignment 1
+    let params = (new URL(document.location)).searchParams;
+    window.onload = function () {
+      if (params.has('errors')) {
+        let errors = JSON.parse(params.get('errors'));
+        let err_str = '';
+        for (err in errors) {
+          err_str += errors[err] + '\n';
+        }
+        alert(err_str);
+      }
+    }
+  </script>
 </head>
-
 <body>
 <div class="login-page">
   <div class="form">
@@ -17,7 +30,7 @@
       <input id="#" type="password" id="#" placeholder="password" required name="password"/>
       <button>login</button>
       <script>
-        document.write(`<p class="message">Not registered? <a id="registrationLink" href="/registration.html${location.search}"> Create an account</a></p>`)
+        document.write(`<p class="message">Not registered? <a href="/registration.html${location.search}"> Create an account</a></p>`)
       </script>
     </form>
 
