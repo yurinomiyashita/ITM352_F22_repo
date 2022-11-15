@@ -35,18 +35,13 @@ var qty_obj = {};   //store quantity entered in store.html
 
 // Module installation
 const crypto = require('crypto');
-// The key for encryption, originally written in the env file for security reasons
-const key = 'Ag3478eb15fh45019a5f9696c912cT62';
-
-const algorithm = 'aes-256-cbc';
-const delimiter = '$';
-
-const encode = (originalText) => {
+// encrypt and return the passed password
+function encode(originalText) {
   const cipher = crypto.createCipher('aes-256-cbc', "pass")
   const crypted = cipher.update(originalText, 'utf-8', 'hex')
   const text = crypted + cipher.final('hex')
   return text;
-};
+}
 
 //determine if there is error in quantity text box.
 //copied from invoice.html in store 1 direcotry and modified 
@@ -141,7 +136,7 @@ function isValidUserInfo(input_email, input_password) {
     if(!(stored_email=== input_email) || !(stored_password === encrpt_input_password)) {
       isUserError = true;
       // if you identify a problem with which one is wrong, there is a vulnerability problem, so an error is displayed that either one does not match
-      errors.push(`Incorrect password or username`);
+      errors.push(`Incorrect password or email`);
     }
   }
 
@@ -164,72 +159,71 @@ app.post("/login_user", function (request, response) {
         "errors": JSON.stringify(errors)
       };
       console.log(qs.stringify(errors_obj));
-      response.redirect('./login.html?' + qs.stringify(errors_obj)); //redirect to login.html and display errors       
+      response.redirect('./login.html?' + qs.stringify(errors_obj) + '&' + qs.stringify(qty_obj)); //redirect to login.html and display errors       
     } else {
       // If there is no error, redirect to invoice
       //the password matches, use the object to pass the email address and full name to the next screen.
       qty_obj['email'] = input_email;
       qty_obj['fullname'] = users_reg_data[input_email].name;
       // Store quantity data
-      let params = new URLSearchParams(qty_obj);
-      response.redirect('./invoice.html?' + params.toString());    //send quantity entred as string to invoice.html
+      response.redirect('./invoice.html?' + qs.stringify(qty_obj));    //send quantity entred as string to invoice.html
       return;
     }
   });
 
   app.post("/registrate_user", function (request, response) {
     // Start with 0 registration errors
-    let registration_errors = {}
+    let registration_errors = []
     const input_email = request.body['email'].toLowerCase();
     const input_password = request.body['password']
     const input_confirm_password = request.body['confirm_Password']
-    const input_username = request.body['username']
+    const input_fullname = request.body['fullname']
     // If the password value entered by the user exists, do a format check on the email address
     if(input_email) {
       // Validate email address
       //case insensive 
-      const email_regex = /^[a-zA-Z0-9\_\.]+@([a-zA-Z0-9]*\.)+[a-zA-Z]{3}$/
+      const email_regex = /^[A-Za-z0-9_.]+@([A-Za-z0-9_.]*\.)+([a-zA-Z]{2}|[a-zA-Z]{3})$/
       if (!(email_regex.test(input_email))) {
-        registration_errors['email'] = `Please enter a valid email address(Ex: jonny@hawaii.edu)`;
+        registration_errors.push(`Please enter a valid email address(Ex: jonny@hawaii.edu)`);
       }
       // Validates that the email inputted has not already been registered
       if (typeof users_reg_data[input_email] != 'undefined') {
-        registration_errors['email'] = `This email address has already been registered`;
+        registration_errors.push(`This email address has already been registered`);
       }
     }
 
     // Validates that password is at least 10 characters
-    if (input_password.length < 10 && input_password.length >16 ) {
-      registration_errors['password'] = `Password must be at least 10 characters and at maximum 16 chacracters`;
+    if (input_password.length < 10 || input_password.length > 16 ) {
+      registration_errors.push(`Password must be at least 10 characters and at maximum 16 chacracters`);
     }
     // Validates that there is a password inputted
     else if (input_password.length == 0) {
-      registration_errors['password'] = `Please enter a password`
+      registration_errors.push(`Please enter a password`)
     }
     //minimum 10 charcaters, Case sensitive, no space allowed 
-    const password_regex = /^[a-zA-Z0-9][^ |　]{10,}$/  
+    const password_regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[!#\$%&@;:])/
     if (!(password_regex.test(input_password))) {
-      registration_errors['password'] = `Please correct format password`;
+      registration_errors.push(`Please include at least special character, number, upper case and lower case`);
     }
     // Validates that the passwords match
     if (input_password != input_confirm_password) {
-      registration_errors['confirm_password'] = `Your passwords do not match, please try again`;
+      registration_errors.push(`Your passwords do not match, please try again`);
     }
     // Validate that the full name inputted consists of A-Z characters exclusively
-    const username_regex = /^[A-Za-z, ]+$/      
-    if (!(username_regex.test(input_username))) {
-      registration_errors['username'] = `Please enter your first and last name`;
+    const fullname_regex = /^[A-Za-z, ]+$/      
+    if (!(fullname_regex.test(input_fullname))) {
+      registration_errors.push(`Please enter your first and last name`);
     }
     // maximum 30 character, minimum 2 characters, only alphabet 
-    if (input_username < 2 || input_username.length > 30) {
-      registration_errors['username'] = `Please enter a name less than 30 characters`;
+    if (input_fullname < 2 || input_fullname.length > 30) {
+      registration_errors.push(`Please enter a name less than 30 characters`);
     }
 
     //when there is no error, format info inputted to the json file   
-    if(Object.keys(registration_errors).length === 0) {
+    if(registration_errors.length === 0) {
       const encrypt_input_password = encode(input_password)
       users_reg_data[input_email] = {
-        name: input_username,
+        name: input_fullname,
         password: encrypt_input_password,
         email: input_email
       };
@@ -239,73 +233,75 @@ app.post("/login_user", function (request, response) {
         fs.writeFileSync(json_file_path, JSON.stringify(users_reg_data));   
         // Add product quantity data
         qty_obj['email'] = input_email;
-        qty_obj['username'] = users_reg_data[input_email].name;
-        let params = new URLSearchParams(qty_obj)
+        qty_obj['fullname'] = users_reg_data[input_email].name;
         // If registered send to invoice with product quantity data
-        response.redirect('./invoice.html?' + params.toString());
+        response.redirect('./invoice.html?' + qs.stringify(qty_obj));
       } catch(err) {
         console.log(err.message);
       }
     } else {
       // If errors exist, redirect to registration page with errors
-      request.body['registration_errors'] = JSON.stringify(registration_errors);
-      let params = new URLSearchParams(request.body);
-      response.redirect("./registration.html?" + qs.stringify(params));
+      let errors_obj = { 
+        "errors": JSON.stringify(registration_errors)
+      };
+      // Store quantity data
+      console.log(qs.stringify(errors_obj));
+      response.redirect('./registration.html?' + qs.stringify(errors_obj) + '&' + qs.stringify(qty_obj));
     }
   });
 
   app.post("/registration-update", function (request, response) {
     // Start with no errors
-    let registration_update_erros = {};
+    let registration_update_errors = [];
     // Pulls data inputed into the form from the body
     let current_email = request.body['currenteEmail'].toLowerCase();
     let current_password = request.body['currentPassword'];
     let new_password = request.body['newPassword'];
     let confirm_password = request.body['confirmPassword'];
     // Validates that email is correct format
-    const email_regex = /^[a-zA-Z0-9\_\.]+@([a-zA-Z0-9]*\.)+[a-zA-Z]{3}$/
+    const email_regex = /^[A-Za-z0-9_.]+@([A-Za-z0-9_.]*\.)+([a-zA-Z]{2}|[a-zA-Z]{3})$/
     if (!(email_regex.test(current_email))) {
-      registration_update_erros['email'] = `Please enter a valid email address(Ex: jonny@hawaii.edu)`;
+      registration_update_errors.push(`Please enter a valid email address(Ex: jonny@hawaii.edu)`);
     } else if (current_email.length == 0) {
       // Validates that there is a current email inputted
-      registration_update_erros['email'] = `Please enter an current email address`
+      registration_update_errors.push(`Please enter an current email address`);
     }
     // Check if the re-entered update email address matches
     if (new_password != confirm_password) {
-      registration_update_erros['confirmPassword'] = `password does not match`;
+      registration_update_errors.push(`password does not match`); 
     }
 
     if(users_reg_data[current_email] === 'undefined') {
-      registration_update_erros['email'] = `Please enter your registered email address`;
+      registration_update_errors.push(`Please enter your registered email address`);
     } else {
       // Validates that password is at least 10 characters
       if (current_password.length < 10 && current_password.length >16 ) {
-        registration_update_erros['password'] = `Password must be at least 10 characters and at maximum 16 chacracters`;
+        registration_update_errors.push(`Password must be at least 10 characters and at maximum 16 chacracters`);
         // Validates that there is a password inputted
       } else if (current_password.length == 0) {
-        registration_update_erros['password'] = `Please enter a password`
+        registration_update_errors.push(`Please enter a password`)
       }
       //minimum 10 charcaters, Case sensitive, no space allowed 
-      const password_regex = /^[a-zA-Z0-9][^ |　]{10,}$/  
+      const password_regex = /^(?=.*[A-Z])(?=.*[!\$#%&])[a-zA-Z0-9.?/-]{10,16}$/
       if (!(password_regex.test(current_password))) {
-        registration_update_erros['password'] = `Please correct format password`;
+        registration_update_errors.push(`Please include at least special character, number, upper case and lower case`);
       }
       // Validates that passwords matches user_data.json
       if (users_reg_data[current_email].password != encode(current_password)) {
-        registration_update_erros['password'] = `The password entered is incorrect`
+        registration_update_errors.push(`The password entered is incorrect`)
       }
       // 
       if (new_password != confirm_password) {
-        registration_update_erros['confirm_password'] = `The passwords you entered do not match`
+        registration_update_errors.push(`The passwords you entered do not match`)
       }
       // Validates that new password is different than current password
       if (new_password && confirm_password == current_password) {
-        registration_update_erros['newpassword'] = `Your new password must be different from your old password`
+        registration_update_errors.push(`Your new password must be different from your old password`)
       }
     }
     
     // If there are no errors
-    if (Object.keys(registration_update_erros).length == 0) {
+    if (Object.keys(registration_update_errors).length == 0) {
       users_reg_data[current_email].password = encode(new_password)
       // update data into user_data.json 
       //try is for handle if there is any errors, 
@@ -313,19 +309,19 @@ app.post("/login_user", function (request, response) {
         fs.writeFileSync(json_file_path, JSON.stringify(users_reg_data));   
         // Add product quantity data
         qty_obj['email'] = current_email;
-        qty_obj['username'] = users_reg_data[current_email].name;
-        let params = new URLSearchParams(qty_obj)
+        qty_obj['fullname'] = users_reg_data[current_email].name;
         // If registered send to invoice with product quantity data
-        response.redirect('./login.html?' + params.toString());
+        response.redirect('./login.html?' + qs.stringify(qty_obj));
       } catch(err) {
         console.log(err.message);
       }
     } else {
       // Request errors
-      request.body['registration_update_erros'] = JSON.stringify(registration_update_erros);
-      let params = new URLSearchParams(request.body);
-      // Redirect back to update registration page with errors in string
-      response.redirect('update_registration.html?' + params.toString());
+      let errors_obj = { 
+        "errors": JSON.stringify(registration_update_errors)
+      };
+      console.log(qs.stringify(errors_obj));
+      response.redirect('registration-update.html?' + qs.stringify(errors_obj) + '&' + qs.stringify(qty_obj));
     }
   })  
 // Start server

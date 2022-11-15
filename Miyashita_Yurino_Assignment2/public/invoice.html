@@ -73,7 +73,7 @@
                     <div class="col-sm-6">
                         <div>
                             <span class="text-sm text-grey-m2 align-middle">To:</span>
-                            <span id="username" class="text-600 text-110 text-blue align-middle"></span>
+                            <span id="fullname" class="text-600 text-110 text-blue align-middle"></span>
                             <br>
                             <span class="text-sm text-grey-m2 align-middle">From:</span>
                             <span class="text-600 text-110 text-blue align-middle">Sunday's Book</span>
@@ -152,7 +152,7 @@
                     if (subtotal <= 15) {     //when shipping is less than $15, then shipping costs $3
                      shipping = 3;            
                         }
-                    else if (subtotal <= 50) {    //when shipping is less than  equal to $50, then shipping costs $5
+                    else if (subtotal >= 50) {    //when shipping is less than  equal to $50, then shipping costs $5
                     shipping = 5;                 
                     }
                     else {
@@ -176,7 +176,7 @@
                             </div>
                             <div class="row my-2">
                                 <div class="col-7 text-right">
-                                    Tax (4.5%)
+                                    Tax (5%)
                                 </div>
                                 <div class="col-5">
                                     <span class="text-110 text-secondary-d1">$${tax.toFixed(2)}</span>
@@ -212,7 +212,7 @@
 
     <center><table class = "policy"> 
        <button><a href="complete.html">Submit</a></button>
-       
+
         <tr>
             <td colspan="4"> <strong>
                 <br> <!-- explains Sunday Bookstore policy -->

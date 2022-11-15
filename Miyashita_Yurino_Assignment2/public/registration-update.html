@@ -20,9 +20,9 @@
             quantity_str += quantity[elem] + '\n';
         }
       }
-      let fullName = params.get('fullname');
+      let fullname = params.get('fullname');
       let email = params.get('email');
-      document.getElementById("username").value = fullName;
+      document.getElementById("fullname").value = fullname;
       document.getElementById("currenteEmail").value = email;
     }
   </script>
@@ -33,7 +33,7 @@
 <div class="login-page">
   <div class="form">
     <form action="registration-update" method="POST">
-      <input type="text" placeholder="name" id="username"  name="username"/>
+      <input type="text" placeholder="name" id="fullname"  name="fullname"/>
       <input type="text" placeholder="current email" id="currenteEmail" name="currenteEmail"/>
       <input type="password" placeholder="current password" name="currentPassword" required />
       <input type="password" placeholder="new password" name="newPassword" required/>
