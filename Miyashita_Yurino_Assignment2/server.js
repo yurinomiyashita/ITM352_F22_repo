@@ -38,11 +38,12 @@ products.forEach((prod, i) => {
 var qty_obj = {};   //store quantity entered in store.html 
 
 
-// Module installation for encryting password 
+// Module installation for encryting password, requiring crypto  
 //IR1
 const crypto = require('crypto');
 
 // encrypt and return the passed password
+//modified code from https://www.folkstalk.com/2022/09/crypto-32-characers-encryption-node-js-with-code-examples-2.html 
 function encode(originalText) {
   const cipher = crypto.createCipher('aes-256-cbc', "pass")
   const crypted = cipher.update(originalText, 'utf-8', 'hex')
@@ -50,7 +51,7 @@ function encode(originalText) {
   return text;
 }
 
-// ------------------------ store.html --------------------------//
+// ------------------------- store.html ----------------------------//
 //determine if there is error in quantity text box.
 //copied from invoice.html in store 1 direcotry and modified 
 function notAPosInt(arrayElement, returnErrors = false) {
@@ -78,7 +79,7 @@ app.post("/purchase", function (request, response, next) {
   let errors = {};
   let available_quantity = false;
   for (i in quantities) {
-    console.log(quantities[i])
+    console.log(quantities[i])    
     if (notAPosInt(quantities[i]) == false) {
       errors['quantity' + i] = `Please submit valid data for ${products[i].name}!` //if quantity enetred is invalid number 
     }
@@ -128,6 +129,7 @@ if(fs.existsSync(json_file_path)) {
   console.log(`File path ${json_file_path} not found `)
 }
 
+
 // ------------------------ login.html --------------------------//
 // Querying input user and json data 
 function isValidUserInfo(input_email, input_password) {
@@ -153,7 +155,7 @@ function isValidUserInfo(input_email, input_password) {
 }
 
 
-// ------------------------ resgistration.html --------------------------//
+//--------------    login.html varify     ----------------------//
 // Processing after pressing the login button
 app.post("/login_user", function (request, response) {
     // Receiving request processing from users
@@ -182,7 +184,7 @@ app.post("/login_user", function (request, response) {
     }
   });
 
-//
+// ------------------------ resgistration.html --------------------------//
   app.post("/registrate_user", function (request, response) {
   // Start with 0 registration errors
   let registration_errors = []
@@ -220,22 +222,21 @@ app.post("/login_user", function (request, response) {
     registration_errors.push(`Please include at least special character, number, upper case and lower case`);
     }
   
-    // Validates that the passwords match
+    // Validates if both passwords match
     if (input_password != input_confirm_password) {
       registration_errors.push(`Your passwords do not match, please try again`);
     }
-    // Validate that the full name inputted consists of A-Z characters exclusively
+    // Validate that the full name inputted, only alphabet
     const fullname_regex = /^[A-Za-z, ]+$/      
     if (!(fullname_regex.test(input_fullname))) {
       registration_errors.push(`Please enter your first and last name`);
     }
-    // maximum 30 character, minimum 2 characters, only alphabet 
+    // maximum 30 character, minimum 2 characters
     if (input_fullname < 2 || input_fullname.length > 30) {
       registration_errors.push(`Please enter a name less than 30 characters`);
     }
 
   //when there is no error, format info inputted to the json file   
-  //IR1
     if(registration_errors.length === 0) {
       const encrypt_input_password = encode(input_password)
       users_reg_data[input_email] = {
@@ -244,13 +245,13 @@ app.post("/login_user", function (request, response) {
         email: input_email
       };
       // store data into user_data.json 
-      //try is for handle if there is any errors, 
+      //try is for handling if there is any errors, 
       try { 
-        fs.writeFileSync(json_file_path, JSON.stringify(users_reg_data));   
+        fs.writeFileSync(json_file_path, JSON.stringify(users_reg_data));    //File I/O operation to write on the file
         // Add product quantity data
         qty_obj['email'] = input_email;
         qty_obj['fullname'] = users_reg_data[input_email].name;
-        // If registered, send to invoice with product quantity data
+        // If registered sucsessfully, send to invoice with product quantity data
         response.redirect('./invoice.html?' + qs.stringify(qty_obj));
       } catch(err) {
         console.log(err.message);
@@ -260,7 +261,7 @@ app.post("/login_user", function (request, response) {
       let errors_obj = { 
         "errors": JSON.stringify(registration_errors)
       };
-      // Store quantity data
+      // Store quantity data, direct to registration.html
       console.log(qs.stringify(errors_obj));
       response.redirect('./registration.html?' + qs.stringify(errors_obj) + '&' + qs.stringify(qty_obj));
     }
@@ -286,7 +287,6 @@ app.post("/registration-update", function (request, response) {
   // Validates that there is a current email inputted
   registration_update_errors.push(`Please enter an current email address`);
     }
-    
   // Check if the re-entered update email address matches
   if (new_password != confirm_password) {
     registration_update_errors.push(`password does not match`); 
@@ -305,9 +305,10 @@ app.post("/registration-update", function (request, response) {
   // Validates that password is at least 10  and maximum 16 characters
   if (new_password.length < 10 || new_password.length > 16 ) {
   registration_update_errors.push(`Password must be at least 10 characters and at maximum 16 chacracters`);
+
   // Validates that there is a password inputted
   } else if (new_password.length == 0) {
-  registration_update_errors.push(`Please enter a password`)
+    registration_update_errors.push(`Please enter a password`)
   }
   //Case sensitive, no space allowed, uppercase, lowe case, at least one number, special character 
   const password_regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!#\$%&@;:])/
@@ -335,7 +336,7 @@ if (Object.keys(registration_update_errors).length == 0) {
   // update data into user_data.json 
   //try is for handle if there is any errors, 
   try {  
-    fs.writeFileSync(json_file_path, JSON.stringify(users_reg_data));   
+    fs.writeFileSync(json_file_path, JSON.stringify(users_reg_data));     
     // Add product quantity data
     qty_obj['email'] = current_email;
     qty_obj['fullname'] = users_reg_data[current_email].name;
@@ -354,5 +355,5 @@ if (Object.keys(registration_update_errors).length == 0) {
     }
 })  
 
-// Start server
+// ------------------ Start server ---------------------//
 app.listen(8080, () => console.log(`listening on port 8080`));
