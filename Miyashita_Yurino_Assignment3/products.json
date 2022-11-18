@@ -1,5 +1,28 @@
-[
-    {
+[ { 
+                "name": "All Good People Here: A Novel",
+                "author":"Ashley Flowers",
+                "price": 23.99,
+                "quantity_available":15,
+                "image": "./images/AtomicHabits.jpg", 
+                "tag":"Non-fiction"
+    },
+    { 
+        "name": "The Adventures of Sherlock homes",
+        "author":"Arthuer Conan Doyle",
+        "price": 11.98,
+        "quantity_available":15,
+        "image": "./images/AtomicHabits.jpg", 
+        "tag":"Non-fiction"
+},      
+{ 
+        "name": "Atomic Habits",
+        "author":"James Clear",
+        "price": 11.98,
+        "quantity_available":15,
+        "image": "./images/AtomicHabits.jpg", 
+        "tag":"Non-fiction"
+},
+    { 
             "name": "Atomic Habits",
             "author":"James Clear",
             "price": 11.98,
@@ -15,14 +38,7 @@
             "image": "./images/RichDadPoorDad.jpg",
             "description":""
     },
-    {
-            "name": "Crazy Rich Asian",
-            "author":"Kevin Kwan",
-            "price": 9.99,
-            "quantity_available":9,
-            "image": "./images/CrazyRichAsian.jpg",
-            "description":""
-    },
+    
     {
             "name": "Talking to Strangers",
             "author":"Malcolm Gladwell",
@@ -45,6 +61,14 @@
             "price": 11.98,
             "quantity_available":5,
             "image": "./images/ItEndsWithUs.jpg",
+            "description":""
+    },
+    {
+            "name": "Crazy Rich Asian",
+            "author":"Kevin Kwan",
+            "price": 9.99,
+            "quantity_available":9,
+            "image": "./images/CrazyRichAsian.jpg",
             "description":""
     }
 ]
