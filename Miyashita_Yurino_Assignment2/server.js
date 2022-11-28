@@ -1,5 +1,8 @@
-//created by Yurino Miyashita 
-//modified Blake Saari's server.js 
+/*
+Yurino Miyashita
+This file is a server and serve as server side data validation for log in, registration, 
+edit account and store display page to check inpuut
+ */
 
 // Load Express Package
 let express = require('express');

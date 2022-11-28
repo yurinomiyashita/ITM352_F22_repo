@@ -1,4 +1,8 @@
-<!--created by Yurino Miyashhita-->
+<!-- 
+Yurino Miyashhita 
+This file is HTML product display page and user can enter desired quantity 
+and click purchase to direct them to log in/registration page
+-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,13 +15,14 @@
   <script src="./products.json" type="text/javascript">
   </script>
   <script>
-    //
+  
+
     // Determines valid quantity (If "q" is a negative interger)
     function isNonNegInt(q, return_errors = false) {
       errors = []; // assume no errors at first
       if (q == '') q = 0; // handle blank inputs as if they are 0
-      if (Number(q) != q) errors.push('<b><font color="red">Not a number!</font></b>'); // Check if string is a number value
-      if (q < 0) errors.push('<b><font color="red">Negative value!</font></b>'); // Check if it is non-negative
+      if (Number(q) != q) errors.push('<b><font color="red">Quanity has to be number!</font></b>'); // Check if string is a number value
+      if (q < 0) errors.push('<b><font color="red">Quantity cannot be a negative value!</font></b>'); // Check if it is non-negative
       if (parseInt(q) != q) errors.push('<b><font color="red">Not an integer!</font></b>'); // Check that it is an integer
       return return_errors ? errors : (errors.length == 0);  
     };
