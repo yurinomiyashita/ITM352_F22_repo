@@ -9,6 +9,7 @@
   <link href="./css/products-style.css" type="text/css" rel="stylesheet">
   <link href="images/" rel="images">
   <script src="./products.json" type="text/javascript">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link>
   </script>
   <script>
     //
@@ -65,7 +66,10 @@
           <div class="menu">
             <ul class="menu-list">
               <li class="menu-list-item"><a href="./index.html">Home</a></li>
-              <li class="menu-list-item" class="active"><a href="#">Products</a></li>
+              <li class="menu-list-item" class="active"><a href="#">Mystery</a></li>
+              <li class="menu-list-item"><a href="./store2.html">Romance</a></li>
+              <li class="menu-list-item"><a href="./store3.html">Non-Fiction</a></li>
+
             </ul>
           </div>
         </div>
@@ -75,7 +79,7 @@
     <script>
         // Print items on page
         //based on store 1 WODs product_display.html 
-        for(i = 0; i < products.length; i++) {
+        for(i = 0; i < 6; i++) {
             document.write(`
             <div class="content">
               <div class="card-list">  <center>
@@ -96,9 +100,11 @@
             `);
         }
     </script>
+    
 </body>
 <br>
 <br>
+
 
 <footer><!--submit button and submit the quantity entered value"purchase" is detremined in sever.js-->
     <div class="label"></div>

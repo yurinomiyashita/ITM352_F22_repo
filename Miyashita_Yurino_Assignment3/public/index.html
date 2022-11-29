@@ -1,44 +1,52 @@
+<!--Yurino Miyashita -->
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width= <device-width>, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Sunday Bookstore index</title>
-    <style>
-        body {
-            text-align: center;
-            background: white;
-        }
-        h1{
-        background-color: #68a3d5!important;
-       
-        }
-        img {
-            border: 1px solid #ddd;
-            /* Gray border */
-            border-radius: 4px;
-            /* Rounded border */
-            padding: 5px;
-            /* Some padding */
-            width: 150px;
-            /* Set a small width */
-        }
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <!--loading cascading style sheet-->
+  <link href="./css/products-style1.css" type="text/css" rel="stylesheet">
+  
+  <!--loading products data-->
+  <script src="./products.json" type="text/javascript"></script>  
 
-        /* Add a hover effect (blue shadow) */
-        img:hover {
-            box-shadow: 0 0 5px 1px black;
-        }
-    </style>
+  <!--Font awesome link -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+
 </head>
-
 <body>
-    <h1>Sunday Bookstore</h1>
-    <a href="./store.html">
-        <img src="./images/book.png" height="50%" width="50%">
-    </a>
-    <h2>Click the image to start shopping!</h1>
+<!--header section starts-->
+<header>
+<a href="#" class="logo">Sunday BookStore <span></span></a>
 
+<nav class="navbar">
+  <a href="index.html">home</a>
+  <a href="store1.html">Mystery</a>
+  <a href="store2.html">Romance</a>
+  <a href="store3.html">Non-Fiction</a>
+</nav>
+
+<div class="icons">
+<a href="#" class="fas fa-heart"></a>
+<a href="#" class="fas fa-user"></a>
+<a href="#" class="fas fa-shopping-cart"></a>
+</div>
+</header>
+<!-- header section ends-->
+
+<!--home section starts-->
+<section class="home" id="home">
+
+  <div class="content">
+    <h3>Welcome to Sunday Bookstore!</h3>
+    <span>Our mission is to provide you with bestsellers</span>
+    <p>Mystery, romance, and Non-Fiction books are available</p>
+    <a href="./store1.html" class="btn">shop now</a>
+
+  </div>
+</section>
+<!--home section ends-->
 </body>
-</html> 
+</html>
