@@ -1,3 +1,7 @@
+:root{
+    --green:rgb(79, 138, 99);
+  }
+  
 body{
     margin-top:20px;
     color: #484b51;
