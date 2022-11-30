@@ -23,7 +23,7 @@
       if (q == '') q = 0; // handle blank inputs as if they are 0
       if (Number(q) != q) errors.push('<b><font color="red">Not a number!</font></b>'); // Check if string is a number value
       if (q < 0) errors.push('<b><font color="red">Negative value!</font></b>'); // Check if it is non-negative
-      if (parseInt(q) != q) errors.push('<b><font color="red">Not an integer!</font></b>'); // Check that it is an integer
+      else if (parseInt(q) != q) errors.push('<b><font color="red">Not an integer!</font></b>'); // Check that it is an integer
       return return_errors ? errors : (errors.length == 0);  
     };
     
@@ -68,7 +68,7 @@
 <div class="icons">
 <a href="#" class="fas fa-heart"></a>
 <a href="#" class="fas fa-user"></a>
-<a href="#" class="fas fa-shopping-cart"></a>
+<a href="./shoppingcart.html" class="fas fa-shopping-cart"></a>
 </div>
 </header>
 <!-- header section ends-->
@@ -83,12 +83,12 @@
     <h1 class="heading"> <span></span></h1>
     <div class="box-container">
         
-        <div class="box">
+        <div class="box" >
             <span class="disccount"></span>
             <div class="image">
                 <img src="${products[i].image}" alt="">
                 <div class="icons">
-                    <a href="#" class="fas fa-heart"></a>
+                    <a href="#" class="fas fa-heart"></a> 
                     <a href="#" class="cart-btn">add to cart</a>
                 </div>
             </div>
