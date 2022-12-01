@@ -1,7 +1,7 @@
 :root{
     --green:rgb(79, 138, 99);
   }
-  
+
 body{
     margin-top:20px;
     color: #484b51;
@@ -66,7 +66,7 @@ hr {
     font-size: 110%!important;
 }
 .text-blue {
-    color: #478fcc!important;
+    color: rgb(79, 138, 99);
 }
 .pb-25, .py-25 {
     padding-bottom: .75rem!important;
@@ -76,7 +76,7 @@ hr {
     padding-top: .75rem!important;
 }
 .bgc-default-tp1 {
-    background-color: rgba(121,169,197,.92)!important;
+    background-color: rgb(79, 138, 99)!important;
 }
 .bgc-default-l4, .bgc-h-default-l4:hover {
     background-color: #f3f8fa!important;
@@ -135,17 +135,24 @@ hr {
 
 button{
     font-family: sans-serif;
-    font-size: 15px;
     text-transform: uppercase;
-    background: #478fcc;
+    background: rgb(79, 138, 99);
     border: 0;
-    width: 100px;
-    padding: 13px;
     transition: all 0.3 ease;
     cursor: pointer;
-    color: white;
-   
+    display: inline-block;
+ margin-top: 1rem;
+ border-radius: 5rem;
+ background: gray;
+ color: #fff;
+ padding: .9rem 3.5rem;
+ cursor: pointer;
+ font-size:1.7rem;
 }
+
+button:hover{
+    background:var(--green);
+  }
 button a{
     color: white;
 }
