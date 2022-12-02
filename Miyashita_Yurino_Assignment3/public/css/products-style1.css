@@ -41,7 +41,7 @@ section{
 }
 
 header{
-  position: fixed;
+  position:sticky;
   top:0; left:0; right:0;
   background: #fff;
   padding: 2rem 9%;
@@ -152,4 +152,68 @@ header .icons a:hover{
   color:#999;
   font-weight: lighter;
   text-decoration: line-through;
+}
+
+/*cart*/
+.shopping p{
+    font-size: 2rem;
+    color: gray;
+    padding: 4rem 10rem 0 10rem;
+    line-height: 1.5;
+    font-weight:600;
+    text-align:left;
+}
+#cart-container table{
+  border-collapse: collapse;
+  width:100%;
+  table-layout: fixed;
+
+}
+
+#cart-container table thead{
+  font-weight: 700;
+}
+
+#cart-container table thead td{
+  background:var(--green);
+  color: #fff;
+  border: none;
+  padding: 6px 0;
+}
+#cart-container table td i{
+  size: 100px;
+}
+
+#cart-container table td{
+  border: 1px solid rgb(206, 199, 199);
+  text-align: center;
+}
+
+#center-container table td:nth-child(1){
+  width: 100px;
+}
+#center-container table td:nth-child(2),
+#center-container table td:nth-child(3){
+  width: 200px;
+}
+#center-container table td:nth-child(4),
+#center-container table td:nth-child(5){
+  width: 170px;
+}
+
+#cart-container table tbody img{
+  width:100px;
+  height:80px;
+  object-fit:scale-down;
+}
+#cart-container table tbody input{
+  width:50%;
+  border-color: #999;
+}
+
+#cart-container table tbody i{
+  color: #999;
+}
+.subtotal{
+border: #999;
 }
