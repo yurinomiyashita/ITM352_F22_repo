@@ -11,15 +11,31 @@ let parser = require("body-parser");
 // Load QueryString Package
 const qs = require('querystring');
 let fs = require('fs')
+var session = require('express-session');
+app.use(express.urlencoded({ extended: true }));
+app.use(session({secret: "MySecretKey", resave: true, saveUninitialized: true}));
 
 // Get Body
 app.use(parser.urlencoded({
   extended: true
 }));
 
+app.all('*', function (request, response, next) {
+  console.log(`Got a ${request.method} to path ${request.path}`);
+  // need to initialize an object to store the cart in the session. We do it when there is any request so that we don't have to check it exists
+  // anytime it's used
+  
+  next();
+});
+
 // Monitor all requests
 app.all('*', function (request, response, next) {
   console.log(request.method + ' to ' + request.path);
+  // need to initialize an object to store the cart in the session. We do it when there is any request so that we don't have to check it exists
+  // anytime it's used
+  if(typeof request.session.cart == 'undefined') { 
+    request.session.cart = {}; 
+  }
   next();
 });
 
@@ -31,10 +47,11 @@ let products = require(__dirname + '/products.json');
 var json_file_path = __dirname + '/user_data.json';
 
 // Initialize Quantity
-products.forEach((prod, i) => {
-  prod.quantity_available = products[i].quantity_available
-})
-
+var keyArray = Object.keys(products)
+for(var i=0; i < keyArray.length; i++) {
+  console.log(products[keyArray[i]][i].quantity_available)
+  products[keyArray[i]][i].quantity_available = products[keyArray[i]][i].quantity_available;
+}
 var qty_obj = {};   //store quantity entered in store.html 
 
 
@@ -167,7 +184,7 @@ app.post("/login_user", function (request, response) {
     const input_password = body['password'];
     // Querying input user and json data
     const {isUserError, errors} = isValidUserInfo(input_email, input_password)
-    if(isUserError) {       //when there is error in log in
+    if(isUserError) {    //when there is error in log in
       let errors_obj = { 
         "errors": JSON.stringify(errors)
       };
@@ -353,7 +370,63 @@ if (Object.keys(registration_update_errors).length == 0) {
     console.log(qs.stringify(errors_obj));
     response.redirect('registration-update.html?' + qs.stringify(errors_obj) + '&' + qs.stringify(qty_obj));
     }
-})  
+})
+
+app.get("/add_to_cart", function (request, response) {
+  var products_key = request.query['products_key']; // get the product key sent from the form post
+  // var products_key = 'Mystery';
+  // var quantities = ['1','5','2','6'].map(Number);
+  var quantities = request.query['quantities'].map(Number); // Get quantities from the form post and convert strings from form post to numbers
+  request.session.cart[products_key] = quantities; // store the quantities array in the session cart object with the same products_key. 
+  response.redirect('./shoppingcart.html');
+});
+
+app.get("/get_cart", function (request, response) {
+  response.json(request.session.cart);
+});
+
+app.get("/checkout", function (request, response) {
+  // Generate HTML invoice string
+    var invoice_str = `Thank you for your order!<table border><th>Quantity</th><th>Item</th>`;
+    var shopping_cart = request.session.cart;
+    for(product_key in products_data) {
+      for(i=0; i<products_data[product_key].length; i++) {
+          if(typeof shopping_cart[product_key] == 'undefined') continue;
+          qty = shopping_cart[product_key][i];
+          if(qty > 0) {
+            invoice_str += `<tr><td>${qty}</td><td>${products_data[product_key][i].name}</td><tr>`;
+          }
+      }
+  }
+    invoice_str += '</table>';
+  // Set up mail server. Only will work on UH Network due to security restrictions
+    var transporter = nodemailer.createTransport({
+      host: "mail.hawaii.edu",
+      port: 25,
+      secure: false, // use TLS
+      tls: {
+        // do not fail on invalid certs
+        rejectUnauthorized: false
+      }
+    });
+  
+    var user_email = 'phoney@mt2015.com';
+    var mailOptions = {
+      from: 'phoney_store@bogus.com',
+      to: user_email,
+      subject: 'Your phoney invoice',
+      html: invoice_str
+    };
+  
+    transporter.sendMail(mailOptions, function(error, info){
+      if (error) {
+        invoice_str += '<br>There was an error and your invoice could not be emailed :(';
+      } else {
+        invoice_str += `<br>Your invoice was mailed to ${user_email}`;
+      }
+      response.send(invoice_str);
+    });
+  });
 
 // ------------------ Start server ---------------------//
 app.listen(8080, () => console.log(`listening on port 8080`));
