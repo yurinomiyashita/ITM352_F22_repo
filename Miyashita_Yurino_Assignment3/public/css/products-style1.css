@@ -22,7 +22,7 @@ html{
 }
 
 section{
-  padding: 2rem 9%;
+  padding: 3rem 4rem;
 }
 
 .btn{
@@ -132,7 +132,7 @@ header .icons a:hover{
    position: relative;
    padding: 3rem 2rem;
    background: #fff;
-
+   width: 300px;
 }
 
  .products .box-container .box .image{
@@ -216,4 +216,10 @@ header .icons a:hover{
 }
 .subtotal{
 border: #999;
+}
+.wrap{
+  width:100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
