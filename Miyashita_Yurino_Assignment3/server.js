@@ -372,29 +372,35 @@ if (Object.keys(registration_update_errors).length == 0) {
     }
 })
 
+var quantities = [];
 app.get("/add_to_cart", function (request, response) {
   var products_key = request.query['products_key']; // get the product key sent from the form post
-  // var products_key = 'Mystery';
-  // var quantities = ['1','5','2','6'].map(Number);
-  var quantities = request.query['quantities'].map(Number); // Get quantities from the form post and convert strings from form post to numbers
+  console.log(`products_key--${products_key}`);
+  request.query['quantities'].map(function(quantity, i) {
+    if(quantity) {
+      quantities[i] = Number(quantity);
+    }
+  });// Get quantities from the form post and convert strings from form post to numbers
   request.session.cart[products_key] = quantities; // store the quantities array in the session cart object with the same products_key. 
-  response.redirect('./shoppingcart.html');
+  console.log(`quantities--${quantities}`);
+  response.redirect('./store1.html');
 });
 
-app.get("/get_cart", function (request, response) {
-  response.json(request.session.cart);
+app.get("/get_cart", async function (request, response) {
+  return response.json(request.session.cart);
 });
-
+const nodemailer = require('nodemailer');
 app.get("/checkout", function (request, response) {
+  console.log("checkoutにきた")
   // Generate HTML invoice string
     var invoice_str = `Thank you for your order!<table border><th>Quantity</th><th>Item</th>`;
     var shopping_cart = request.session.cart;
-    for(product_key in products_data) {
+    for(product_key in shopping_cart) {
       for(i=0; i<products_data[product_key].length; i++) {
           if(typeof shopping_cart[product_key] == 'undefined') continue;
           qty = shopping_cart[product_key][i];
           if(qty > 0) {
-            invoice_str += `<tr><td>${qty}</td><td>${products_data[product_key][i].name}</td><tr>`;
+            invoice_str += `<tr><td>${qty}</td><td>${shopping_cart[product_key][i].name}</td><tr>`;
           }
       }
   }
@@ -410,7 +416,7 @@ app.get("/checkout", function (request, response) {
       }
     });
   
-    var user_email = 'phoney@mt2015.com';
+    var user_email = 'yurinom@hawaii.edu';
     var mailOptions = {
       from: 'phoney_store@bogus.com',
       to: user_email,
@@ -420,6 +426,7 @@ app.get("/checkout", function (request, response) {
   
     transporter.sendMail(mailOptions, function(error, info){
       if (error) {
+        console.log(error)
         invoice_str += '<br>There was an error and your invoice could not be emailed :(';
       } else {
         invoice_str += `<br>Your invoice was mailed to ${user_email}`;
