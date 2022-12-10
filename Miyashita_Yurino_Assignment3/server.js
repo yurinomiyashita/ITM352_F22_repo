@@ -394,9 +394,9 @@ app.get("/checkout", function (request, response) {
   console.log("checkoutにきた")
   // Generate HTML invoice string
     var invoice_str = `Thank you for your order!<table border><th>Quantity</th><th>Item</th>`;
-    var shopping_cart = request.session.cart;
+    var shopping_cart = {"Mystery":[3,4,1,2,3],"Romance":[1,5,1,4,2],"Non-Fiction":[2,3,4,1,4]};
     for(product_key in shopping_cart) {
-      for(i=0; i<products_data[product_key].length; i++) {
+      for(i=0; i<shopping_cart[product_key].length; i++) {
           if(typeof shopping_cart[product_key] == 'undefined') continue;
           qty = shopping_cart[product_key][i];
           if(qty > 0) {
@@ -429,11 +429,11 @@ app.get("/checkout", function (request, response) {
         console.log(error)
         invoice_str += '<br>There was an error and your invoice could not be emailed :(';
       } else {
-        invoice_str += `<br>Your invoice was mailed to ${user_email}`;
+        invoice_str += `<br>Your invoice was mailed to ${user_email}. You might find your invoice at Spam folder`;
       }
       response.send(invoice_str);
     });
-  });
+});
 
 // ------------------ Start server ---------------------//
 app.listen(8080, () => console.log(`listening on port 8080`));
