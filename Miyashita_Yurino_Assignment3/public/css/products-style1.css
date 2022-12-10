@@ -145,7 +145,10 @@ header .icons a:hover{
   height:25rem;
 }
 
-
+.product .box-container .box input{
+  background-color: #fff;
+  color: #333;
+}
 
 .products .box-container .box .content .price span{
   font-size: 1.5rem;
