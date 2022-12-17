@@ -1,3 +1,8 @@
+/* 
+Yurino Miyashita 
+This file for loading products data files and display the items in store.html without hard coding each display pages 
+but allow users to choose genre that they are looking for.
+*/
 window.addEventListener('DOMContentLoaded', function() {
     if (params.has('key')) {
       var key = params.get('key');

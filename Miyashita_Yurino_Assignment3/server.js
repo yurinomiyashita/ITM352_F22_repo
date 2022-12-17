@@ -1,4 +1,8 @@
-//created by yurino Miyashita 
+/*
+Yurino Miyashita
+This file is a server and serve as server side data validation for log in, registration, 
+edit account and store display page to check inpuut
+ */
 //modified Blake Saari's server.js 
 
 // Load Express Package

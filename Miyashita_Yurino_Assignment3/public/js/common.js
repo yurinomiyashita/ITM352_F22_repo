@@ -1,3 +1,6 @@
+/*
+Yurino Miyashita
+*/
 // sessionStrageにkey(閲覧中かどうかのキー)を保存
 // 閲覧中がなければ閲覧中をtrueにする
 // localStorageに毎回ページが変わるごとにページを保存する
