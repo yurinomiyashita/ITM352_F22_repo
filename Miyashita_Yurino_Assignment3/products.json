@@ -10,7 +10,7 @@
 },      { 
         "name": "The Adventures of Sherlock homes",
         "author":"Arthuer Conan Doyle",
-        "price": 11.98,
+        "price": 10.88,
         "quantity_available":15,
         "image": "./images/TheAdventuresOfSH.png", 
         "tag":"Mystery"
@@ -31,7 +31,7 @@
 },      { 
         "name": "The Maid",
         "author":"Nota Prose",
-        "price": 11.98,
+        "price": 12.00,
         "quantity_available":15,
         "image": "./images/TheMaid.png", 
         "tag":"Mystery"
