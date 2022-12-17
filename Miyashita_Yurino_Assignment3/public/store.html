@@ -1,4 +1,4 @@
-<!--Yurino Miyashita -->
+<!--yurino Miyashita -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -66,7 +66,7 @@
              quantity.forEach((element, i) => {
                document.getElementById(`quantity${i}`).value = quantity[i];
              });
-         }         
+         }        
        }   
     }
    //processing when sending errors 
@@ -110,9 +110,9 @@
 
 <nav class="navbar">
   <a href="index.html">home</a>
-  <a href="javascript:void(0);" onclick="displayProducts('Mystery')">Mystery</a>
-  <a href="javascript:void(0);" onclick="displayProducts('Romance')">Romance</a>
-  <a href="javascript:void(0);" onclick="displayProducts('Non-Fiction')">Non-Fiction</a>
+  <a href="store.html?key=Mystery">Mystery</a>
+  <a href="store.html?key=Romance">Romance</a>
+  <a href="store.html?key=Non-Fiction">Non-Fiction</a>
 </nav>
 
 <div class="icons">
@@ -126,40 +126,11 @@
 
 <!--product section starts-->
 <form action="/add_to_cart" method="GET" onsubmit="return checkError()">
-<div class="wrapp">
-  <script>
-    for(var i = 0; i < 6; i++) {
-        document.write(`
-        <section class="products" id="products">
-    <h1 class="heading"> <span></span></h1>
-    <div class="box-container">
-        
-        <div class="box" >
-            <span class="disccount"></span>
-            <div class="image">
-                <img src="${products.product[i].image}" alt="">
-                <div class="icons">
-                    <a href="#" class="fas fa-heart"></a> 
-                    <a id="addCart${i}" class="addCart" href="./add_to_cart?products_key='Mystery'" class="cart-btn" name="${products.Mystery[i].name}">add to cart</a>
-                    <input type="submit"  name="submit${i}" value="カートに入れる">
-                </div>
-            </div>
-            <div class="content">
-                <h3>${products.Mystery[i].name}</h3>
-                <h4>${products.Mystery[i].author}</h4>
-                <div class="price">$${products.Mystery[i].price}</div>
-                <label id="quantity${i}_label"> Enter Quantity Desired: </label>
-                <div class="input">
-                <input id="quantity${i}" name="quantities[${i}]" type="text" placeholder = "Quantity Available: ${products.Mystery[i].quantity_available}" name = "quantity" onkeyup="checkQuantityTextbox(this, 'Mystery');"></div>
-            </div>
-        </div>
-    </div>
-</section>`);
-}
-</script>
-            <input type="hidden" name="products_key" value="Mystery">
+<div id="wrap" class="wrapp">
 </div>
 <!--products section ends-->
+<script src="js/diplayProducts.js"></script>
+<script src="js/common.js"></script>
 </body>
 <footer><!--submit button and submit the quantity entered value"purchase" is detremined in sever.js-->
   <div class="label"></div>

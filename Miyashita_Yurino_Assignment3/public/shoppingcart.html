@@ -1,4 +1,4 @@
-<!--Yurino Miyashita -->
+<!--yurino Miyashita -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,7 +25,7 @@
         contentHtml += `<b>cart is empty</b>`;
       } else {
         for (var key in products) {
-          if (!cart_data[key].length === 0) {
+          if (!cart_data[key] || !cart_data[key].length === 0) {
             continue;
           } else {
             for (var i = 0; i < products[key].length; i++) {
@@ -34,7 +34,7 @@
               } else {
                 contentHtml += `
                   <tr>
-                    <td><a href="#"><i class="fas fa-trash-alt"></i></a></td>
+                    <td><a class="deleteButton"><i id="${key}-${i}" class="fas fa-trash-alt"></i></a></td>
                     <td><img src="${products[key][i].image}" alt=""></td>
                     <td><h2>${products[key][i].name}</h2></td>
                     <td><h2>$${products[key][i].price}</h2></td>
@@ -50,6 +50,25 @@
       }
       document.getElementById("total").textContent = `$${total}`;
       document.getElementById("cartContent").insertAdjacentHTML('beforebegin', contentHtml);
+      var deleteButton = document.getElementsByClassName('deleteButton')
+      for(var i=0; i < deleteButton.length; i++) {
+        deleteButton[i].addEventListener('click', function(e) {
+          var productKey = e.target.id.split('-')[0];
+          var index = e.target.id.split('-')[1]
+          var xhr = new XMLHttpRequest();
+          xhr.open('GET', `http://localhost:8080/delete_cart?products_key=${productKey}&index=${index}`);
+          xhr.send();
+          xhr.onreadystatechange = function() {
+          if(xhr.readyState === 4 && xhr.status === 200) {
+              var data = JSON.parse(xhr.responseText); 
+              if(!(Object.keys(data).length === 0)) {
+                alert('ok')
+              };
+              window.href="/shopping.html";
+          }
+          }          
+        })
+      }
     }
 
 
@@ -64,11 +83,11 @@
             var data = JSON.parse(xhr.responseText); 
             if(!(Object.keys(data).length === 0)) {
             // shopping_cart = data;
-              cart_data = {"Mystery":[3,4,1,2,3],"Romance":[1,5,1,4,2],"Non-Fiction":[2,3,4,1,4]};
+              cart_data = data;
             };
             displayCartContent();
         }
-        }
+        }        
   </script>
 </head>
 <body>
@@ -78,21 +97,21 @@
         <a href="#" class="logo">Sunday BookStore <span></span></a>
     
         <nav class="navbar">
-            <a href="index.html">home</a>
-            <a href="store1.html">Mystery</a>
-            <a href="store2.html">Romance</a>
-            <a href="store3.html">Non-Fiction</a>
+          <a href="index.html">home</a>
+          <a href="store.html?key=Mystery">Mystery</a>
+          <a href="store.html?key=Romance">Romance</a>
+          <a href="store.html?key=Non-Fiction">Non-Fiction</a>
         </nav>
     
     <div class="icons">
-    <a href="#" class="fas fa-heart"></a>
-    <a href="#" class="fas fa-user"></a>
-    <a href="#" class="fas fa-shopping-cart"></a>
+      <a href="#" class="fas fa-heart"></a>
+      <a href="./login.html" class="fas fa-user"></a>
+      <a href="./shoppingcart.html" class="fas fa-shopping-cart"></a>
     </div>
     </header> 
     <!-- header section ends-->
 
-
+<form action="/purchase" method="GET">
     <!--shopping cart section starts-->
     
     <div class="shopping">
@@ -117,14 +136,13 @@
     <section id="cart-button" class="Subtotal">
         <div class="total">
             <div><h5>Cart Total</h5></div>
-            <div><h5>Subtotal</h5>
-            <p>$120</p></div>
             <div><h5>Total</h5>
             <p id="total"></p></div>
-            <button>proceed to checkout</button>
+            <button type="submit">proceed to checkout</button>
         </div>
 
     </section>
     <!--shopping cart section ends-->
+    </form>
 </body>
 </html>
