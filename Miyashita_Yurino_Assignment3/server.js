@@ -4,6 +4,7 @@ This file is a server and serve as server side data validation for log in, regis
 edit account and store display page to check inpuut
  */
 
+
 // Load Express Package
 let express = require('express');
 let app = express();
@@ -31,7 +32,7 @@ app.use(
     cookie: {
       path: '/', // default
       httpOnly: true, // settings to prevent access from JavaScript
-      maxAge: 3600000, // Set cookie duration to 60 minutes
+      // maxAge: 3600000, // Set cookie duration to 60 minutes
     },
   }));
 
@@ -501,9 +502,14 @@ app.get("/delete_cart", async function (request, response) {
   // Get the index in the product category information from the url query parameter
   var index = request.query['index'];
   // Delete product information in session information
-  request.session.cart[products_key][index] = 0;
-  // Delete product information in cookie information
-  request.cookies.products[products_key][index] = 0;
+  if(request.session.cart[products_key] === 'undefined' ) {
+  } else {
+    request.session.cart[products_key][index] = 0;
+  }
+  if(request.cookies.products[products_key] === 'undefined' ) {
+  } else {
+    request.session.cart[products_key][index] = 0;
+  }
   // Redirect to cart screen after deleting product
   response.redirect(`./shoppingcart.html`);
 });
@@ -529,7 +535,6 @@ app.get("/checkout", function (request, response) {
   }
     invoice_str += '</table>';
   // Set up mail server. Only will work on UH Network due to security restrictions
-  //mail will be only sent when user's device connected to campus network 
     var transporter = nodemailer.createTransport({
       host: "mail.hawaii.edu",
       port: 25,
