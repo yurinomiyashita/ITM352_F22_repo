@@ -42,7 +42,7 @@ it will let users to click purchase and lead them to invoice page when they are 
                     <td><img src="${products[key][i].image}" alt=""></td>
                     <td><h2>${products[key][i].name}</h2></td>
                     <td><h2>$${products[key][i].price}</h2></td>
-                    <td><input class="w-25 pl-1" type="number" value="${cart_data[key][i]}"></td>
+                    <td><h2>${cart_data[key][i]}<h2></td>
                     <td><h2>${products[key][i].price * cart_data[key][i]}</h2></td>
                   </tr>
                   `;
@@ -64,11 +64,12 @@ it will let users to click purchase and lead them to invoice page when they are 
           xhr.send();
           xhr.onreadystatechange = function() {
           if(xhr.readyState === 4 && xhr.status === 200) {
-              var data = JSON.parse(xhr.responseText); 
-              if(!(Object.keys(data).length === 0)) {
-                alert('ok')
-              };
-              window.href="/shopping.html";
+              const result = confirm(`Do you want to delete ${products[productKey][index].name}?`)
+              if(result) {
+                location.href ="/shoppingcart.html";
+              } else {
+                return false;
+              }
           }
           }          
         })
@@ -108,7 +109,6 @@ it will let users to click purchase and lead them to invoice page when they are 
         </nav>
     
     <div class="icons">
-      <a href="#" class="fas fa-heart"></a>
       <a href="./login.html" class="fas fa-user"></a>
       <a href="./shoppingcart.html" class="fas fa-shopping-cart"></a>
     </div>
